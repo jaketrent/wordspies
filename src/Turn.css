@@ -1,3 +1,12 @@
 .root {
   text-align: center;
+  color: white;
+}
+.rootRed {
+  composes: root;
+  background: red;
+}
+.rootBlue {
+  composes: root;
+  background: blue;
 }
