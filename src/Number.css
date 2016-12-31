@@ -1,0 +1,13 @@
+.root {
+  margin: 0 auto;
+}
+.num {
+  display: inline-block;
+  outline: 1px solid grey;
+  padding: 15px 25px;
+  cursor: pointer;
+}
+.numActive {
+  composes: num;
+  background: grey;
+}

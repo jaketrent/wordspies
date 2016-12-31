@@ -31,6 +31,9 @@ function create(layouts = defaultLayouts, words = defaultWords) {
   const randomWords = findUniqueRandomWords(words, layout.tiles.length)
   return {
     ...layout,
+    guess: {
+      count: 1
+    },
     tiles: layout.tiles.map((color, i) => ({
       color,
       faceup: false,
@@ -53,6 +56,9 @@ function turnTileFaceup(game, i) {
 function switchTurn(game) {
   return {
     ...game,
+    guess: {
+      count: 1
+    },
     turn: game.turn === 'r' ? 'b' : 'r'
   }
 }
@@ -63,7 +69,17 @@ function advanceGame(game, i) {
   return state
 }
 
+function setGuessCount(game, count) {
+  return {
+    ...game,
+    guess: {
+      count
+    }
+  }
+}
+
 exports.create = create
 exports.turnTileFaceup = turnTileFaceup
 exports.switchTurn = switchTurn
 exports.advanceGame = advanceGame
+exports.setGuessCount = setGuessCount

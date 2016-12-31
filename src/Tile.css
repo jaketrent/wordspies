@@ -8,4 +8,5 @@
   line-height: var(--tileHeight);
   white-space: nowrap;
   text-overflow: ellipsis;
+  cursor: pointer;
 }

@@ -43,6 +43,11 @@ describe('#create', () => {
     })
   })
 
+  it('has a starting guess of 1 count', () => {
+    const actual = subject.create(layouts, words)
+    assert.equal(actual.guess.count, 1)
+  })
+
 })
 
 describe('#turnTileFaceup', () => {
@@ -82,6 +87,29 @@ describe('#switchTurn', () => {
 
     actual = subject.switchTurn(actual)
     assert.equal(actual.turn, 'r')
+  })
+
+  it('resets guess count to 1', () => {
+    const game = {
+      guess: { count: 3 }
+    }
+    let actual = subject.switchTurn(game)
+    assert.equal(actual.guess.count, 1)
+  })
+
+})
+
+describe('#setGuessCount', () => {
+
+  it('sets guess count to specifiedd number', () => {
+    const game = {
+      guess: {
+        count: 2
+      }
+    }
+    const newCount = 4
+    let actual = subject.setGuessCount(game, newCount)
+    assert.equal(actual.guess.count, newCount)
   })
 
 })
