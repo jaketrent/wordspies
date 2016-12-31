@@ -1,12 +1,13 @@
-var autoprefixer = require('autoprefixer');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 var InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 var WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
+var postcssImport = require('postcss-import')
+var cssnext = require('postcss-cssnext')
+
 var getClientEnvironment = require('./env');
 var paths = require('./paths');
-
 
 
 // Webpack uses `publicPath` to determine where the app is being served from.
@@ -132,11 +133,6 @@ module.exports = {
           cacheDirectory: true
         }
       },
-      // "postcss" loader applies autoprefixer to our CSS.
-      // "css" loader resolves paths in CSS and adds assets as dependencies.
-      // "style" loader turns CSS into JS modules that inject <style> tags.
-      // In production, we use a plugin to extract that CSS to a file, but
-      // in development "style" loader enables hot editing of CSS.
       {
         test: /\.css$/,
         loader: 'style!css?modules=true&localIdentName=[path][name]---[local]---[hash:base64:5]&importLoaders=1!postcss'
@@ -157,20 +153,10 @@ module.exports = {
       }
     ]
   },
-  
-  // We use PostCSS for autoprefixing only.
-  postcss: function() {
-    return [
-      autoprefixer({
-        browsers: [
-          '>1%',
-          'last 4 versions',
-          'Firefox ESR',
-          'not ie < 9', // React doesn't support IE8 anyway
-        ]
-      }),
-    ];
-  },
+  postcss: [
+    postcssImport,
+    cssnext
+  ],
   plugins: [
     // Makes the public URL available as %PUBLIC_URL% in index.html, e.g.:
     // <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">

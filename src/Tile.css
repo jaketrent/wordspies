@@ -1,0 +1,11 @@
+@import "./vars.css";
+
+.root {
+  display: inline-block;
+  outline: 1px solid black;
+  width: var(--tileWidth);
+  height: var(--tileHeight);
+  line-height: var(--tileHeight);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
