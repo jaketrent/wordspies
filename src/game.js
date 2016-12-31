@@ -26,7 +26,7 @@ function findUniqueRandomWords(words, count) {
   return shuffle(words.slice(0)).slice(0, count)
 }
 
-exports.create = function create(layouts = defaultLayouts, words = defaultWords) {
+function create(layouts = defaultLayouts, words = defaultWords) {
   const layout = layouts[randInt(0, layouts.length - 1)]
   const randomWords = findUniqueRandomWords(words, layout.tiles.length)
   return {
@@ -40,7 +40,7 @@ exports.create = function create(layouts = defaultLayouts, words = defaultWords)
   }
 }
 
-exports.turnTileFaceup = function turnTileFaceup(game, i) {
+function turnTileFaceup(game, i) {
   const tile = game.tiles[i]
   const tiles = game.tiles.slice(0)
   tiles.splice(i, 1, { ...tile, faceup: true })
@@ -50,9 +50,20 @@ exports.turnTileFaceup = function turnTileFaceup(game, i) {
   }
 }
 
-exports.switchTurn = function switchTurn(game) {
+function switchTurn(game) {
   return {
     ...game,
     turn: game.turn === 'r' ? 'b' : 'r'
   }
 }
+
+function advanceGame(game, i) {
+  let state = turnTileFaceup(game, i)
+  state = switchTurn(state)
+  return state
+}
+
+exports.create = create
+exports.turnTileFaceup = turnTileFaceup
+exports.switchTurn = switchTurn
+exports.advanceGame = advanceGame

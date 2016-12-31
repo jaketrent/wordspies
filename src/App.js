@@ -13,9 +13,7 @@ class App extends Component {
   handleClickTile(i) {
     const tile = this.state.game.tiles[i]
     if (!tile.faceup) {
-      let gameState = game.turnTileFaceup(this.state.game, i)
-      gameState = game.switchTurn(gameState)
-      this.setState({ game: gameState })
+      this.setState({ game: game.advanceGame(this.state.game, i) })
     }
   }
   render() {
