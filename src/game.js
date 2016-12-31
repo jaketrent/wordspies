@@ -33,6 +33,7 @@ exports.create = function (layouts = defaultLayouts, words = defaultWords) {
     ...layout,
     tiles: layout.tiles.map((color, i) => ({
       color,
+      faceup: false,
       word: randomWords[i]
     }))
   }

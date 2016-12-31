@@ -3,5 +3,4 @@
 .root {
   width: calc(5 * var(--tileWidth));
   margin: 0 auto;
-  outline: 1px solid red;
 }

@@ -33,3 +33,10 @@ it('assigns a color to each tile', () => {
   })
 })
 
+it('assigns a faceup false to each tile', () => {
+  const actual = subject.create(layouts, words).tiles
+  assert.equal(actual.length, 25)
+  actual.forEach(t => {
+    assert.equal(t.faceup, false)
+  })
+})
