@@ -26,7 +26,7 @@ function findUniqueRandomWords(words, count) {
   return shuffle(words.slice(0)).slice(0, count)
 }
 
-exports.create = function (layouts = defaultLayouts, words = defaultWords) {
+exports.create = function create(layouts = defaultLayouts, words = defaultWords) {
   const layout = layouts[randInt(0, layouts.length - 1)]
   const randomWords = findUniqueRandomWords(words, layout.tiles.length)
   return {
@@ -35,6 +35,24 @@ exports.create = function (layouts = defaultLayouts, words = defaultWords) {
       color,
       faceup: false,
       word: randomWords[i]
-    }))
+    })),
+    turn: layout.first
+  }
+}
+
+exports.turnTileFaceup = function turnTileFaceup(game, i) {
+  const tile = game.tiles[i]
+  const tiles = game.tiles.slice(0)
+  tiles.splice(i, 1, { ...tile, faceup: true })
+  return {
+    ...game,
+    tiles
+  }
+}
+
+exports.switchTurn = function switchTurn(game) {
+  return {
+    ...game,
+    turn: game.turn === 'r' ? 'b' : 'r'
   }
 }

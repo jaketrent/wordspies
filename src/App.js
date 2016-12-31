@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import css from './App.css'
 import Board from './Board'
+import Turn from './Turn'
+import game from './game'
 
 class App extends Component {
   constructor(props) {
@@ -11,19 +13,16 @@ class App extends Component {
   handleClickTile(i) {
     const tile = this.state.game.tiles[i]
     if (!tile.faceup) {
-      const tiles = this.state.game.tiles.slice(0)
-      tiles.splice(i, 1, { ...tile, faceup: true })
-      const game = {
-        ...this.state.game,
-        tiles
-      }
-      this.setState({ game })
+      let gameState = game.turnTileFaceup(this.state.game, i)
+      gameState = game.switchTurn(gameState)
+      this.setState({ game: gameState })
     }
   }
   render() {
     return (
       <div className={css.root}>
         <Board onClickTile={this.handleClickTile} tiles={this.state.game.tiles} />
+        <Turn turn={this.state.game.turn} />
       </div>
     )
   }
