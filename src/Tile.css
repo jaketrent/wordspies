@@ -10,3 +10,19 @@
   text-overflow: ellipsis;
   cursor: pointer;
 }
+.colorRed {
+  composes: root;
+  background: red;
+}
+.colorBlue {
+  composes: root;
+  background: blue;
+}
+.colorNeutral {
+  composes: root;
+   background: tan;
+}
+.colorAssassin {
+  composes: root;
+  background: black;
+}
