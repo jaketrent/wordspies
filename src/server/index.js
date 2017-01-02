@@ -16,6 +16,10 @@ app.use(route.post('/games', function* create() {
   this.body = store.save(game.create())
 }))
 
+app.use(route.get('/games/:gameId', function* find(gameId) {
+  this.body = store.lookup(gameId)
+}))
+
 app.use(route.post('/games/:gameId/cards/:index', function* create(gameId, index) {
   this.body = store.save(game.advanceGame(store.lookup(gameId), index))
 }))

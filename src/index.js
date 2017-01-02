@@ -1,13 +1,16 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import App from './App'
 import { Router, Route, browserHistory } from 'react-router'
+
+import App from './App'
+import AgentGame from './AgentGame'
 
 import './index.css'
 
 ReactDOM.render(
   <Router history={browserHistory}>
     <Route path="/" component={App} />
+    <Route path="/games/:gameId" component={AgentGame} />
   </Router>,
   document.getElementById('root')
 )
