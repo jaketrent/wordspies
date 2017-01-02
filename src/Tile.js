@@ -7,11 +7,20 @@ class Tile extends React.Component {
   getClassName() {
     const colors = {
       r: css.colorRed,
+      rk: css.colorRedKeyed,
       b: css.colorBlue,
+      bk: css.colorBlueKeyed,
       n: css.colorNeutral,
+      nk: css.colorNeutralKeyed,
       a: css.colorAssassin,
+      ak: css.colorAssassinKeyed
     }
-    return this.props.tile.faceup ? colors[this.props.tile.color] : css.root
+    
+    return this.props.tile.faceup
+      ? colors[this.props.tile.color]
+      : this.props.keyed
+        ? colors[this.props.tile.color + 'k']
+        : css.root
   }
   render() {
     return (
@@ -22,7 +31,8 @@ class Tile extends React.Component {
   }
 }
 Tile.propTypes = {
-  onClick: func.isRequired,
+  keyed: bool,
+  onClick: func,
   tile: shape({
     color: string.isRequired,
     faceup: bool.isRequired,

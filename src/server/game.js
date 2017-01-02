@@ -32,9 +32,6 @@ function create(layouts = defaultLayouts, words = defaultWords) {
   return Object.assign({},
     layout,
     {
-      guess: {
-        count: 1
-      },
       tiles: layout.tiles.map((color, i) => ({
         color,
         faceup: false,
@@ -55,9 +52,7 @@ function turnTileFaceup(game, i) {
 
 function switchTurn(game) {
   return Object.assign({}, game, {
-    guess: {
-      count: 1
-    },
+    hint: null,
     turn: game.turn === 'r' ? 'b' : 'r'
   })
 }
@@ -68,16 +63,14 @@ function advanceGame(game, i) {
   return state
 }
 
-function setGuessCount(game, count) {
+function giveHint(game, hint) {
   return Object.assign({}, game, {
-    guess: {
-      count
-    }
+    hint
   })
 }
 
 exports.turnTileFaceup = turnTileFaceup
 exports.switchTurn = switchTurn
 exports.advanceGame = advanceGame
-exports.setGuessCount = setGuessCount
 exports.create = create
+exports.giveHint = giveHint

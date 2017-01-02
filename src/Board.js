@@ -2,12 +2,13 @@ import React from 'react'
 import Tile from './Tile'
 import css from './Board.css'
 
-const { func } = React.PropTypes
+const { arrayOf, bool, func, object } = React.PropTypes
 
 class Board extends React.Component {
   renderTile(tile, i) {
     return <Tile key={i}
-                 onClick={this.props.onClickTile.bind(null, i)}
+                 onClick={this.props.onClickTile ? this.props.onClickTile.bind(null, i) : null}
+                 keyed={this.props.keyed}
                  tile={tile} />
   }
   renderTiles() {
@@ -22,7 +23,9 @@ class Board extends React.Component {
   }
 }
 Board.propTypes = {
-  onClickTile: func.isRequired
+  onClickTile: func,
+  keyed: bool,
+  tiles: arrayOf(object)
 }
 
 export default Board

@@ -41,9 +41,9 @@ describe('#create', () => {
     })
   })
 
-  it('has a starting guess of 1 count', () => {
+  it('has a starting hint of null', () => {
     const actual = subject.create(layouts, words)
-    assert.equal(actual.guess.count, 1)
+    assert.equal(actual.hint, null)
   })
 
 })
@@ -87,27 +87,27 @@ describe('#switchTurn', () => {
     assert.equal(actual.turn, 'r')
   })
 
-  it('resets guess count to 1', () => {
+  it('resets hint to null', () => {
     const game = {
-      guess: { count: 3 }
+      hint: { word: 'someword', count: 3 }
     }
     let actual = subject.switchTurn(game)
-    assert.equal(actual.guess.count, 1)
+    assert.equal(actual.hint, null)
   })
 
 })
 
-describe('#setGuessCount', () => {
+describe('#giveHint', () => {
 
-  it('sets guess count to specifiedd number', () => {
-    const game = {
-      guess: {
-        count: 2
-      }
+  it('sets hint on game', () => {
+    const game = {}
+    const hint = {
+      word: 'theword',
+      count: 3
     }
-    const newCount = 4
-    let actual = subject.setGuessCount(game, newCount)
-    assert.equal(actual.guess.count, newCount)
+    const actual = subject.giveHint(game, hint)
+    assert.equal(actual.hint.word, hint.word)
+    assert.equal(actual.hint.count, hint.count)
   })
 
 })

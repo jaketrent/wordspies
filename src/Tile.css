@@ -9,20 +9,37 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   cursor: pointer;
+  text-align: center;
 }
 .colorRed {
   composes: root;
   background: red;
 }
+.colorRedKeyed {
+  composes: root;
+  background: pink;
+}
 .colorBlue {
   composes: root;
   background: blue;
 }
+.colorBlueKeyed {
+  composes: root;
+  background: lightblue;
+}
 .colorNeutral {
   composes: root;
-   background: tan;
+  background: tan;
+}
+.colorNeutralKeyed {
+  composes: root;
+  background: #ede1d1;
 }
 .colorAssassin {
   composes: root;
   background: black;
+}
+.colorAssassinKeyed {
+  composes: root;
+  background: grey;
 }
