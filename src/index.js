@@ -11,7 +11,6 @@ async function create() {
 
 async function run() {
   const game = await create()
-  console.log('game', game)
   ReactDOM.render(
     <App game={game} />,
     document.getElementById('root')
@@ -19,3 +18,4 @@ async function run() {
 }
 
 run()
+

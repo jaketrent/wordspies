@@ -9,6 +9,7 @@ const app = koa()
 const port = process.env.PORT || 3001
 
 app.use(cors())
+
 app.use(route.post('/games', function* create() {
   this.body = store.save(game.create())
 }))
