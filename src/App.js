@@ -4,7 +4,6 @@ import css from './App.css'
 import Board from './Board'
 import Turn from './Turn'
 import Number from './Number'
-import game from './game'
 
 class App extends Component {
   constructor(props) {
@@ -20,11 +19,13 @@ class App extends Component {
   handleClickTile(i) {
     const tile = this.state.game.tiles[i]
     if (!tile.faceup) {
-      this.setState({ game: game.advanceGame(this.state.game, i) })
+      axios.post('http://localhost:3001/games/' + this.state.game.id + '/cards/' + i)
+        .then(res => this.setState({ game: res.data }))
     }
   }
   handleClickNum(num) {
-    this.setState({ game: game.setGuessCount(this.state.game, num) })
+    // TODO: re-impl after codemaster view impl
+    // this.setState({ game: game.setGuessCount(this.state.game, num) })
   }
   render() {
     return this.state.game
