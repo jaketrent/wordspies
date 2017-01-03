@@ -30,7 +30,7 @@ class AgentGame extends React.Component {
   }
   handleClickTile(i) {
     const tile = this.state.game.tiles[i]
-    if (!tile.faceup) {
+    if (!tile.faceup && this.state.game.hint) {
       game.agentPlay(this.state.game.id, i)
     }
   }

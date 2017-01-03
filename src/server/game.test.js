@@ -87,6 +87,21 @@ describe('#turnTileFaceup', () => {
     assert.equal(actual.playCount, 2)
   })
 
+  it('saves lastPlayedTile', () => {
+    const index = 1
+    const game = {
+      playCount: 1,
+      tiles: [
+        { faceup: true, id: 'tile1' },
+        { faceup: false, id: 'tile2' }
+      ]
+    }
+
+    const actual = subject.turnTileFaceup(game, index)
+
+    assert.equal(actual.lastPlayedTile.id, game.tiles[index].id)
+  })
+
 })
 
 describe('#switchTurn', () => {
@@ -94,18 +109,20 @@ describe('#switchTurn', () => {
   it('flips turn attribute to other team color', () => {
     const index = 1
     const game = {
+      hint: { count: 3 },
+      lastPlayedTile: { color: 'r' },
+      playCount: 4,
       turn: 'r'
     }
     let actual = subject.switchTurn(game)
     assert.equal(actual.turn, 'b')
-
-    actual = subject.switchTurn(actual)
-    assert.equal(actual.turn, 'r')
   })
 
   it('resets hint to null', () => {
     const game = {
-      hint: { word: 'someword', count: 3 }
+      hint: { word: 'someword', count: 3 },
+      lastPlayedTile: { color: 'r' },
+      playCount: 4
     }
     let actual = subject.switchTurn(game)
     assert.equal(actual.hint, null)
@@ -113,12 +130,73 @@ describe('#switchTurn', () => {
 
   it('resets playCount to 0', () => {
     const game = {
+      hint: { count: 2 },
+      lastPlayedTile: { color: 'r' },
       playCount: 3
     }
     let actual = subject.switchTurn(game)
     assert.equal(actual.playCount, 0)
   })
 
+  it('does not switch when team playCount hasnt exceeded hint.count plus one', () => {
+    const game = {
+      hint: { count: 1 },
+      lastPlayedTile: { color: 'r' },
+      playCount: 1,
+      turn: 'r'
+    }
+
+    let actual = subject.switchTurn(game)
+    assert.equal(actual.turn, 'r')
+  })
+
+  it('switches when the team uses hint.count plays plus one', () => {
+    const game = {
+      hint: { count: 1 },
+      lastPlayedTile: { color: 'r' },
+      playCount: 2,
+      turn: 'r'
+    }
+
+    let actual = subject.switchTurn(game)
+    assert.equal(actual.turn, 'b')
+  })
+
+  it('switches when the team chooses a tile that doesnt match their color', () => {
+    const game = {
+      hint: { count: 3 },
+      lastPlayedTile: { color: 'b' },
+      playCount: 1,
+      turn: 'r'
+    }
+
+    let actual = subject.switchTurn(game)
+    assert.equal(actual.turn, 'b')
+  })
+
+  it('does not switch when the team chooses a tile that matches their color', () => {
+    const game = {
+      hint: { count: 3 },
+      lastPlayedTile: { color: 'r' },
+      playCount: 1,
+      turn: 'r'
+    }
+
+    let actual = subject.switchTurn(game)
+    assert.equal(actual.turn, 'r')
+  })
+
+  it('removes lastPlayedTile in any case', () => {
+    const game = {
+      hint: { count: 3 },
+      lastPlayedTile: { color: 'r' },
+      playCount: 1,
+      turn: 'r'
+    }
+
+    let actual = subject.switchTurn(game)
+    assert.equal(actual.lastPlayedTile, null) 
+  })
 })
 
 describe('#giveHint', () => {

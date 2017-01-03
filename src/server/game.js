@@ -45,19 +45,30 @@ function create(layouts = defaultLayouts, words = defaultWords) {
 function turnTileFaceup(game, i) {
   const tile = game.tiles[i]
   const tiles = game.tiles.slice(0)
-  tiles.splice(i, 1, Object.assign({}, tile, { faceup: true }))
+  const updatedTile = Object.assign({}, tile, { faceup: true })
+
+  tiles.splice(i, 1, updatedTile)
+
   return Object.assign({}, game, {
+    lastPlayedTile: updatedTile,
     playCount: game.playCount + 1,
     tiles
   })
 }
 
 function switchTurn(game) {
-  return Object.assign({}, game, {
-    hint: null,
-    playCount: 0,
-    turn: game.turn === 'r' ? 'b' : 'r'
-  })
+  const outOfPlays = game.playCount >= game.hint.count + 1
+  const choseIncorrectTile = game.lastPlayedTile.color !== game.turn
+  return outOfPlays || choseIncorrectTile
+    ? Object.assign({}, game, {
+        hint: null,
+        lastPlayedTile: null,
+        playCount: 0,
+        turn: game.turn === 'r' ? 'b' : 'r'
+      })
+  : Object.assign({}, game, {
+      lastPlayedTile: null
+    })
 }
 
 function advanceGame(game, i) {
