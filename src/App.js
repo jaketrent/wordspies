@@ -19,7 +19,8 @@ class App extends Component {
       ? (
         <div className={css.root}>
           <Link className={css.link} to={'/games/' + this.state.game.id}>for Agents</Link>
-          <Link className={css.link} to={'/games/' + this.state.game.id + '/codemasters'}>for Codemasters</Link>
+          <Link className={css.link} to={'/games/' + this.state.game.id + '/codemasters/red'}>for Codemasters (team Red)</Link>
+          <Link className={css.link} to={'/games/' + this.state.game.id + '/codemasters/blue'}>for Codemasters (team Blue)</Link>
         </div>
       )
     : (

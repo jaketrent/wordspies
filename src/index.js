@@ -11,7 +11,7 @@ ReactDOM.render(
   <Router history={browserHistory}>
     <Route path="/" component={App} />
     <Route path="/games/:gameId" component={AgentGame} />
-    <Route path="/games/:gameId/codemasters" component={CodemasterKey} />
+    <Route path="/games/:gameId/codemasters/:teamColor" component={CodemasterKey} />
   </Router>,
   document.getElementById('root')
 )

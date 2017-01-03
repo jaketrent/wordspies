@@ -1,0 +1,18 @@
+
+no teams
+because we want to use it as a tabletop device
+
+allow turn off text hints from codemasters, just in-person verbal
+
+code masters are team-based
+
+code masters input count
+
+if team continues to get their color, they have hint.count + 1 plays they can make
+
+turn switch when:
+team exhausts plays
+or
+team picks non-team color
+or
+team has made at least one play and team decides not to continue

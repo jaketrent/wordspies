@@ -8,6 +8,14 @@ import game from './game'
 
 const { shape, string} = React.PropTypes
 
+function toUpper(str) {
+  return str.charAt(0).toUpperCase() + str.substr(1)
+}
+
+function getTeamId(teamColor) {
+  return teamColor === 'red' ? 'r' : 'b'
+}
+
 class CodemasterKey extends React.Component {
   constructor(props) {
     super(props)
@@ -34,9 +42,12 @@ class CodemasterKey extends React.Component {
     return this.state.game
       ? (
         <div className={css.root}>
+          <h2>{toUpper(this.props.params.teamColor)}'s Codemaster</h2>
           <Board keyed={true} tiles={this.state.game.tiles} />
           <Turn turn={this.state.game.turn} />
-          <Hint onSubmit={this.handleSubmitHint} />
+          <Hint game={this.state.game}
+                onSubmit={this.handleSubmitHint}
+                teamId={getTeamId(this.props.params.teamColor)} />
         </div>
       )
       : <div>Loading key...</div>
@@ -44,6 +55,7 @@ class CodemasterKey extends React.Component {
 }
 CodemasterKey.propTypes = {
   params: shape({
+    teamColor: string.isRequired,
     gameId: string.isRequired
   })
 }

@@ -3,7 +3,7 @@ import React from 'react'
 import Number from './Number'
 import css from './Hint.css'
 
-const { func } = React.PropTypes
+const { func, object, string } = React.PropTypes
 
 class Hint extends React.Component {
   constructor(props) {
@@ -27,13 +27,15 @@ class Hint extends React.Component {
         <Number>
           <input type="number" name="count" value="1" />
         </Number>
-        <button>Give hint</button>
+        <button disabled={this.props.teamId !== this.props.game.turn}>Give hint</button>
       </form>
     )
   }
 }
 Hint.propTypes = {
-  onSubmit: func.isRequired
+  game: object,
+  onSubmit: func.isRequired,
+  teamId: string.isRequired
 }
 
 export default Hint
