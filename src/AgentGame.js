@@ -1,6 +1,7 @@
 import React from 'react'
 
 import Board from './Board'
+import EndTurn from './EndTurn'
 import PlayCount from './PlayCount'
 import ReadonlyHint from './ReadonlyHint'
 import Turn from './Turn'
@@ -15,6 +16,7 @@ class AgentGame extends React.Component {
     this.state = { game: null }
     this.handleClickTile = this.handleClickTile.bind(this)
     this.handleGameUpdated = this.handleGameUpdated.bind(this)
+    this.handleClickEndTurn = this.handleClickEndTurn.bind(this)
   }
   componentWillMount() {
     game.lookup(this.props.params.gameId)
@@ -34,6 +36,9 @@ class AgentGame extends React.Component {
       game.agentPlay(this.state.game.id, i)
     }
   }
+  handleClickEndTurn() {
+    game.endTurn(this.state.game.id)
+  }
   render() {
     return this.state.game
       ? (
@@ -43,6 +48,8 @@ class AgentGame extends React.Component {
           <Turn turn={this.state.game.turn} />
           <ReadonlyHint hint={this.state.game.hint} />
           <PlayCount count={this.state.game.playCount} />
+          <EndTurn count={this.state.game.playCount}
+                   onClick={this.handleClickEndTurn} />
         </div>
       )
       : <div>Loading game...</div>

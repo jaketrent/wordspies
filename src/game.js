@@ -28,6 +28,10 @@ function codemasterHint(gameId, hint) {
   getSocket().emit('codemaster-hint', { gameId, hint })
 }
 
+function endTurn(gameId) {
+  getSocket().emit('end-turn', { gameId })
+}
+
 function listenGameUpdated(fn) {
   getSocket().on('game-updated', fn)
 }
@@ -39,6 +43,7 @@ function unlistenGameUpdated(fn) {
 exports.create = create
 exports.lookup = lookup
 exports.agentPlay = agentPlay
+exports.endTurn = endTurn
 exports.codemasterHint = codemasterHint
 exports.listenGameUpdated = listenGameUpdated
 exports.unlistenGameUpdated = unlistenGameUpdated

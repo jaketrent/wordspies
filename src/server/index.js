@@ -29,6 +29,7 @@ app.use(route.post('/games/:gameId/cards/:index', function* agentPlay(gameId, in
   this.body = store.save(game.advanceGame(store.lookup(gameId), index))
 }))
 
+// TODO: rm
 app.use(route.post('/games/:gameId/hints', function* codemasterHint(gameId) {
   this.body = store.save(game.giveHint(store.lookup(gameId), this.request.body))
 }))
@@ -47,6 +48,11 @@ io.on('agent-play', (ctx, data) => {
 io.on('codemaster-hint', (ctx, data) => {
   const { gameId, hint } = data
   io.broadcast('game-updated', store.save(game.giveHint(store.lookup(gameId), hint)))
+})
+
+io.on('end-turn', (ctx, data) => {
+  const { gameId } = data
+  io.broadcast('game-updated', store.save(game.endTurn(store.lookup(gameId))))
 })
 
 app.listen(port)

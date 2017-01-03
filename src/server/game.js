@@ -56,19 +56,27 @@ function turnTileFaceup(game, i) {
   })
 }
 
+function resetTurn(game) {
+  return Object.assign({}, game, {
+    hint: null,
+    lastPlayedTile: null,
+    playCount: 0,
+    turn: game.turn === 'r' ? 'b' : 'r'
+  })
+}
+
 function switchTurn(game) {
   const outOfPlays = game.playCount >= game.hint.count + 1
   const choseIncorrectTile = game.lastPlayedTile.color !== game.turn
   return outOfPlays || choseIncorrectTile
-    ? Object.assign({}, game, {
-        hint: null,
-        lastPlayedTile: null,
-        playCount: 0,
-        turn: game.turn === 'r' ? 'b' : 'r'
-      })
+    ? resetTurn(game)
   : Object.assign({}, game, {
       lastPlayedTile: null
     })
+}
+
+function endTurn(game) {
+  return resetTurn(game)
 }
 
 function advanceGame(game, i) {
@@ -88,3 +96,4 @@ exports.switchTurn = switchTurn
 exports.advanceGame = advanceGame
 exports.create = create
 exports.giveHint = giveHint
+exports.endTurn = endTurn

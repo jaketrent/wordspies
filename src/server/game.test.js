@@ -197,6 +197,25 @@ describe('#switchTurn', () => {
     let actual = subject.switchTurn(game)
     assert.equal(actual.lastPlayedTile, null) 
   })
+
+})
+
+describe('#switchTurn', () => {
+
+  it('resets all turn-related data', () => {
+    const game = {
+      hint: { word: 'something', count: 1 },
+      lastPlayedTile: { foo: 'bar' },
+      playCount: 1,
+      turn: 'r'
+    }
+    let actual = subject.endTurn(game)
+    assert.equal(actual.hint, null)
+    assert.equal(actual.lastPlayedTile, null)
+    assert.equal(actual.playCount, 0)
+    assert.equal(actual.turn, 'b')
+  })
+
 })
 
 describe('#giveHint', () => {
