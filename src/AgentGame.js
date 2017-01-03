@@ -1,9 +1,9 @@
-import axios from 'axios'
 import React from 'react'
 
 import Board from './Board'
 import Turn from './Turn'
 import css from './AgentGame.css'
+import game from './game'
 
 const { shape, string} = React.PropTypes
 
@@ -12,16 +12,24 @@ class AgentGame extends React.Component {
     super(props)
     this.state = { game: null }
     this.handleClickTile = this.handleClickTile.bind(this)
+    this.handleGameUpdated = this.handleGameUpdated.bind(this)
   }
   componentWillMount() {
-    axios.get('http://localhost:3001/games/' + this.props.params.gameId)
-      .then(res => this.setState({ game: res.data }))
+    game.lookup(this.props.params.gameId)
+      .then(g => this.setState({ game: g }))
+
+    game.listenGameUpdated(this.handleGameUpdated)
+  }
+  componentWillUnmount() {
+    game.unlistenGameUpdated(this.handleGameUpdated)
+  }
+  handleGameUpdated(g) {
+    this.setState({ game: g })
   }
   handleClickTile(i) {
     const tile = this.state.game.tiles[i]
     if (!tile.faceup) {
-      axios.post('http://localhost:3001/games/' + this.state.game.id + '/cards/' + i)
-        .then(res => this.setState({ game: res.data }))
+      game.agentPlay(this.state.game.id, i)
     }
   }
   render() {

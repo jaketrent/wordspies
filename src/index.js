@@ -5,7 +5,6 @@ import { Router, Route, browserHistory } from 'react-router'
 import App from './App'
 import AgentGame from './AgentGame'
 import CodemasterKey from './CodemasterKey'
-
 import './index.css'
 
 ReactDOM.render(

@@ -1,8 +1,8 @@
-import axios from 'axios'
 import { Link } from 'react-router'
 import React, { Component } from 'react'
 
 import css from './App.css'
+import game from './game'
 
 class App extends Component {
   constructor(props) {
@@ -11,8 +11,8 @@ class App extends Component {
     this.handleClickCreate = this.handleClickCreate.bind(this)
   }
   handleClickCreate() {
-    axios.post('http://localhost:3001/games')
-      .then(res => this.setState({ game: res.data }))
+    game.create()
+      .then(g => this.setState({ game: g }))
   }
   render() {
     return this.state.game

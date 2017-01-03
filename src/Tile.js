@@ -15,7 +15,7 @@ class Tile extends React.Component {
       a: css.colorAssassin,
       ak: css.colorAssassinKeyed
     }
-    
+
     return this.props.tile.faceup
       ? colors[this.props.tile.color]
       : this.props.keyed

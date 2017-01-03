@@ -1,10 +1,10 @@
-import axios from 'axios'
 import React from 'react'
 
 import Board from './Board'
 import Hint from './Hint'
 import Turn from './Turn'
 import css from './CodemasterKey.css'
+import game from './game'
 
 const { shape, string} = React.PropTypes
 
@@ -13,14 +13,22 @@ class CodemasterKey extends React.Component {
     super(props)
     this.state = { game: null }
     this.handleSubmitHint = this.handleSubmitHint.bind(this)
+    this.handleGameUpdated = this.handleGameUpdated.bind(this)
   }
   componentWillMount() {
-    axios.get('http://localhost:3001/games/' + this.props.params.gameId)
-      .then(res => this.setState({ game: res.data }))
+    game.lookup(this.props.params.gameId)
+      .then(g => this.setState({ game: g }))
+
+    game.listenGameUpdated(this.handleGameUpdated)
+  }
+  componentWillUnmount() {
+    game.unlistenGameUpdated(this.handleGameUpdated)
+  }
+  handleGameUpdated(g) {
+    this.setState({ game: g })
   }
   handleSubmitHint(hint) {
-    axios.post('http://localhost:3001/games/' + this.props.params.gameId + '/hints', hint)
-      .then(res => this.setState({ game: res.data }))
+    game.codemasterHint(this.props.params.gameId, hint)
   }
   render() {
     return this.state.game
