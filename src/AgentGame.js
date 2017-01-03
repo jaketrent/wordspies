@@ -1,6 +1,7 @@
 import React from 'react'
 
 import Board from './Board'
+import PlayCount from './PlayCount'
 import ReadonlyHint from './ReadonlyHint'
 import Turn from './Turn'
 import css from './AgentGame.css'
@@ -41,6 +42,7 @@ class AgentGame extends React.Component {
                  tiles={this.state.game.tiles} />
           <Turn turn={this.state.game.turn} />
           <ReadonlyHint hint={this.state.game.hint} />
+          <PlayCount count={this.state.game.playCount} />
         </div>
       )
       : <div>Loading game...</div>

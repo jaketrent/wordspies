@@ -32,6 +32,7 @@ function create(layouts = defaultLayouts, words = defaultWords) {
   return Object.assign({},
     layout,
     {
+      playCount: 0,
       tiles: layout.tiles.map((color, i) => ({
         color,
         faceup: false,
@@ -46,6 +47,7 @@ function turnTileFaceup(game, i) {
   const tiles = game.tiles.slice(0)
   tiles.splice(i, 1, Object.assign({}, tile, { faceup: true }))
   return Object.assign({}, game, {
+    playCount: game.playCount + 1,
     tiles
   })
 }
@@ -53,6 +55,7 @@ function turnTileFaceup(game, i) {
 function switchTurn(game) {
   return Object.assign({}, game, {
     hint: null,
+    playCount: 0,
     turn: game.turn === 'r' ? 'b' : 'r'
   })
 }

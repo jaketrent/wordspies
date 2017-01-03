@@ -46,6 +46,11 @@ describe('#create', () => {
     assert.equal(actual.hint, null)
   })
 
+  it('has a starting playCount of 0', () => {
+    const actual = subject.create(layouts, words)
+    assert.equal(actual.playCount, 0)
+  })
+
 })
 
 describe('#turnTileFaceup', () => {
@@ -71,6 +76,17 @@ describe('#turnTileFaceup', () => {
     })
   })
 
+  it('increments playCount', () => {
+    const game = {
+      playCount: 1,
+      tiles: [{ faceup: true}, { faceup: false }]
+    }
+
+    const actual = subject.turnTileFaceup(game, 1)
+
+    assert.equal(actual.playCount, 2)
+  })
+
 })
 
 describe('#switchTurn', () => {
@@ -93,6 +109,14 @@ describe('#switchTurn', () => {
     }
     let actual = subject.switchTurn(game)
     assert.equal(actual.hint, null)
+  })
+
+  it('resets playCount to 0', () => {
+    const game = {
+      playCount: 3
+    }
+    let actual = subject.switchTurn(game)
+    assert.equal(actual.playCount, 0)
   })
 
 })
