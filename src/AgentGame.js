@@ -1,6 +1,7 @@
 import React from 'react'
 
 import Board from './Board'
+import ReadonlyHint from './ReadonlyHint'
 import Turn from './Turn'
 import css from './AgentGame.css'
 import game from './game'
@@ -37,8 +38,9 @@ class AgentGame extends React.Component {
       ? (
         <div className={css.root}>
           <Board onClickTile={this.handleClickTile}
-                tiles={this.state.game.tiles} />
+                 tiles={this.state.game.tiles} />
           <Turn turn={this.state.game.turn} />
+          <ReadonlyHint hint={this.state.game.hint} />
         </div>
       )
       : <div>Loading game...</div>
