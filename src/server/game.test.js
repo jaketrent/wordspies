@@ -256,4 +256,19 @@ describe('#checkPhaseChange', () => {
     assert.equal(actual.phase, 'won')
   })
 
+  it('changes to "gameover" if the assassin tile is faceup', () => {
+    const game = {
+      phase: 'playing',
+      tiles: [
+        { color: 'b', faceup: true },
+        { color: 'r', faceup: false },
+        { color: 'a', faceup: true }
+      ],
+      turn: 'r'
+    }
+    
+    const actual = subject.checkPhaseChange(game)
+
+    assert.equal(actual.phase, 'gameover')
+  })
 })

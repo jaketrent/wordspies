@@ -1,0 +1,12 @@
+.root {
+  color: white;
+  font-size: 18px;
+}
+.rootRed {
+  composes: root;
+  background: red;
+}
+.rootBlue {
+  composes: root;
+  background: blue;
+}

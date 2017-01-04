@@ -104,10 +104,18 @@ function currentTeamWon(game) {
     .length === 0
 }
 
+function assassinFaceup(game) {
+  return game.tiles
+    .filter(t => t.color === 'a' && t.faceup)
+    .length > 0
+}
+
 function checkPhaseChange(game) {
-  return currentTeamWon(game)
-    ? Object.assign({}, game, { phase: 'won' })
-    : game
+  return assassinFaceup(game)
+    ? Object.assign({}, game, { phase: 'gameover' })
+    : currentTeamWon(game)
+      ? Object.assign({}, game, { phase: 'won' })
+      : game
 }
 
 exports.turnTileFaceup = turnTileFaceup

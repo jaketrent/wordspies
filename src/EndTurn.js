@@ -10,7 +10,7 @@ class EndTurn extends React.Component {
     ? (
         <button className={css.root} onClick={this.props.onClick}>End Turn</button>
       )
-    : null
+    : <noscript></noscript>
   }
 }
 EndTurn.propTypes = {

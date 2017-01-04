@@ -1,6 +1,7 @@
 import React from 'react'
 
 import Board from './Board'
+import GameOver from './GameOver'
 import EndTurn from './EndTurn'
 import Phase from './Phase'
 import PlayCount from './PlayCount'
@@ -54,6 +55,9 @@ class AgentGame extends React.Component {
           </Phase>
           <Phase in={['won']} phase={this.state.game.phase}>
             <Victory teamId={this.state.game.turn} />
+          </Phase>
+          <Phase in={['gameover']} phase={this.state.game.phase}>
+            <GameOver teamId={this.state.game.turn} />
           </Phase>
           <Phase in={['playing']} phase={this.state.game.phase}>
             <ReadonlyHint hint={this.state.game.hint} />
