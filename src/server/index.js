@@ -25,15 +25,6 @@ app.use(route.get('/games/:gameId', function* find(gameId) {
   this.body = store.lookup(gameId)
 }))
 
-app.use(route.post('/games/:gameId/cards/:index', function* agentPlay(gameId, index) {
-  this.body = store.save(game.advanceGame(store.lookup(gameId), index))
-}))
-
-// TODO: rm
-app.use(route.post('/games/:gameId/hints', function* codemasterHint(gameId) {
-  this.body = store.save(game.giveHint(store.lookup(gameId), this.request.body))
-}))
-
 io.attach(app)
 
 io.on('create', (ctx, data) => {
