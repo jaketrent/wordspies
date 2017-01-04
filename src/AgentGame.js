@@ -7,6 +7,7 @@ import Phase from './Phase'
 import PlayCount from './PlayCount'
 import ReadonlyHint from './ReadonlyHint'
 import TeamName from './TeamName'
+import Title from './Title'
 import Turn from './Turn'
 import Victory from './Victory'
 import css from './AgentGame.css'
@@ -48,7 +49,7 @@ class AgentGame extends React.Component {
     return this.state.game
       ? (
         <div className={css.root}>
-          <h2>Wordspies</h2>
+          <Title>Word Spies</Title>
           <Board onClickTile={this.handleClickTile}
                  tiles={this.state.game.tiles} />
           <Turn turn={this.state.game.turn}>

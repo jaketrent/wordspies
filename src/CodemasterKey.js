@@ -5,6 +5,7 @@ import GameOver from './GameOver'
 import Hint from './Hint'
 import Phase from './Phase'
 import TeamName from './TeamName'
+import Title from './Title'
 import Turn from './Turn'
 import Victory from './Victory'
 import css from './CodemasterKey.css'
@@ -12,7 +13,7 @@ import game from './game'
 
 const { shape, string} = React.PropTypes
 
-function toUpper(str) {
+function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.substr(1)
 }
 
@@ -46,7 +47,7 @@ class CodemasterKey extends React.Component {
     return this.state.game
       ? (
         <div className={css.root}>
-          <h2>{toUpper(this.props.params.teamColor)}'s Codemaster</h2>
+          <Title>{capitalize(this.props.params.teamColor)}'s Codemaster</Title>
           <Board keyed={true} tiles={this.state.game.tiles} />
           <Turn turn={this.state.game.turn}>
             <Phase in={['playing']} phase={this.state.game.phase}>

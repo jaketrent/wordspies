@@ -1,0 +1,9 @@
+.root {
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 26px;
+  margin: 20px 0 26px 0;
+  letter-spacing: 1px;
+}
