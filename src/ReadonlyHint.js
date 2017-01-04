@@ -9,7 +9,7 @@ class ReadonlyHint extends React.Component {
     return this.props.hint
     ? (
         <div className={css.root}>
-          <span className={css.label}>Hint:</span> {this.props.hint.word}/{this.props.hint.count}
+          <span className={css.label}>Hint:</span> {this.props.hint.word} / {this.props.hint.count}
         </div>
       )
     : <div className={css.rootWaiting}>Waiting for hint...</div>

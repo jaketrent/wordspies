@@ -25,7 +25,7 @@ class Number extends React.Component {
   }
   renderInput() {
     return React.cloneElement(this.props.children, {
-      style: {}, // TODO: hide
+      style: { display: 'none' },
       value: this.state.count
     })
   }

@@ -20,14 +20,14 @@ class Hint extends React.Component {
   render() {
     return (
       <form className={css.root} onSubmit={this.handleSubmit}>
-        <label htmlFor="word">
-          <span>Word:</span>
-          <input type="text" name="word" />
+        <label className={css.label} htmlFor="word">
+          <span className={css.labelText}>Hint:</span>
+          <input className={css.input} type="text" name="word" />
         </label>
         <Number>
           <input type="number" name="count" value="1" />
         </Number>
-        <button disabled={this.props.teamId !== this.props.game.turn}>Give hint</button>
+        <button className={css.btn} disabled={this.props.teamId !== this.props.game.turn}>Give hint</button>
       </form>
     )
   }

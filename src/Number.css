@@ -1,13 +1,20 @@
 .root {
-  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
 }
 .num {
-  display: inline-block;
-  outline: 1px solid grey;
-  padding: 15px 25px;
+  padding: 7px 12px;
+  font-size: 18px;
   cursor: pointer;
+  background: #efefef;
+  border: 1px solid grey;
+  border-radius: 3px;
+}
+.num + .num {
+  margin-left: 2px;
 }
 .numActive {
   composes: num;
   background: grey;
+  border: 1px solid grey;
 }
