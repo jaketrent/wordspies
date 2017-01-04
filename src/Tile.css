@@ -1,3 +1,5 @@
+@import "./vars.css";
+
 .root {
   display: inline-flex;
   width: 20%;
@@ -20,36 +22,65 @@
   border: 3px solid #A5917B;
   text-transform: uppercase;
   box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.2);
+
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+.color {
+  composes: tile;
+  color: white;
+  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+  transition: background 1s 0.82s, color 1s 0.82s;
+}
+.colorKeyed {
+  composes: tile;
 }
 .colorRed {
-  composes: tile;
-  background: red;
+  composes: color;
+  background: var(--colorRed);
 }
 .colorRedKeyed {
-  composes: tile;
-  background: pink;
+  composes: colorKeyed;
+  background: var(--colorRedKeyed);
 }
 .colorBlue {
-  composes: tile;
-  background: blue;
+  composes: color;
+  background: var(--colorBlue);
 }
 .colorBlueKeyed {
-  composes: tile;
-  background: lightblue;
+  composes: colorKeyed;
+  background: var(--colorBlueKeyed);
 }
 .colorNeutral {
-  composes: tile;
-  background: tan;
+  composes: color;
+  color: white;
+  background: var(--colorTan);
 }
 .colorNeutralKeyed {
-  composes: tile;
-  background: #ede1d1;
+  composes: colorKeyed;
+  background: var(--colorTanKeyed);
 }
 .colorAssassin {
-  composes: tile;
-  background: black;
+  composes: color;
+  background: var(--colorBlack);
 }
 .colorAssassinKeyed {
-  composes: tile;
-  background: grey;
+  composes: colorKeyed;
+  background: var(--colorBlackKeyed);
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
 }

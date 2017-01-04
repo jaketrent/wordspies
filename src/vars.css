@@ -1,4 +1,12 @@
 :root {
   --tileWidth: 100px;
   --tileHeight: 50px;
+  --colorRed: #cc1414;
+  --colorRedKeyed: #ff7f7f;
+  --colorBlue: #1414cc;
+  --colorBlueKeyed: #8989e5;
+  --colorBlack: #464646;
+  --colorBlackKeyed: #999999;
+  --colorTan: #d2b48c;
+  --colorTanKeyed: #e8d9c5;
 }
