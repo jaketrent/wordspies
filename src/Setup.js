@@ -1,3 +1,4 @@
+import DocumentTitle from 'react-document-title'
 import { Link } from 'react-router'
 import React, { Component } from 'react'
 
@@ -19,14 +20,19 @@ class Setup extends Component {
   render() {
     const gameId = this.props.params.gameId
     return (
-      <div className={css.root}>
-        <Title>Choose your role</Title>
-        <div className={css.links}>
-          <Link className={css.link} to={'/games/' + gameId + '/agents'}>Agent</Link>
-          <Link className={css.link} to={'/games/' + gameId + '/codemasters/red'}>Red Codemaster</Link>
-          <Link className={css.link} to={'/games/' + gameId + '/codemasters/blue'}>Blue Codemaster</Link>
+      <DocumentTitle title="Choose your role | WordSpies">
+        <div className={css.root}>
+          <Title>Choose your role</Title>
+          <div className={css.links}>
+            <Link className={css.link} to={'/games/' + gameId + '/agents'}>Agent</Link>
+            <Link className={css.link} to={'/games/' + gameId + '/codemasters/red'}>Red Codemaster</Link>
+            <Link className={css.link} to={'/games/' + gameId + '/codemasters/blue'}>Blue Codemaster</Link>
+          </div>
+          <p className={css.instructions}>
+            Share this link with other players so they can join on their own devices.
+          </p>
         </div>
-      </div>
+      </DocumentTitle>
     )
   }
 }

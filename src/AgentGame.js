@@ -1,3 +1,4 @@
+import DocumentTitle from 'react-document-title'
 import React from 'react'
 
 import Board from './Board'
@@ -48,32 +49,34 @@ class AgentGame extends React.Component {
   render() {
     return this.state.game
       ? (
-        <div className={css.root}>
-          <Title>Word Spies</Title>
-          <Board onClickTile={this.handleClickTile}
-                 tiles={this.state.game.tiles} />
-          <Turn turn={this.state.game.turn}>
-            <Phase in={['playing']} phase={this.state.game.phase}>
-              <TeamName turn={this.state.game.turn} />
-            </Phase>
-            <Phase in={['playing']} phase={this.state.game.phase}>
-              <ReadonlyHint hint={this.state.game.hint} />
-            </Phase>
-            <Phase in={['playing']} phase={this.state.game.phase}>
-              <PlayCount count={this.state.game.playCount} />
-            </Phase>
-            <Phase in={['playing']} phase={this.state.game.phase}>
-              <EndTurn count={this.state.game.playCount}
-                      onClick={this.handleClickEndTurn} />
-            </Phase>
-            <Phase in={['won']} phase={this.state.game.phase}>
-              <Victory teamId={this.state.game.turn} />
-            </Phase>
-            <Phase in={['gameover']} phase={this.state.game.phase}>
-              <GameOver teamId={this.state.game.turn} />
-            </Phase>
-          </Turn>
-        </div>
+        <DocumentTitle title="Agents | WordSpies">
+          <div className={css.root}>
+            <Title>WordSpies</Title>
+            <Board onClickTile={this.handleClickTile}
+                  tiles={this.state.game.tiles} />
+            <Turn turn={this.state.game.turn}>
+              <Phase in={['playing']} phase={this.state.game.phase}>
+                <TeamName turn={this.state.game.turn} />
+              </Phase>
+              <Phase in={['playing']} phase={this.state.game.phase}>
+                <ReadonlyHint hint={this.state.game.hint} />
+              </Phase>
+              <Phase in={['playing']} phase={this.state.game.phase}>
+                <PlayCount count={this.state.game.playCount} />
+              </Phase>
+              <Phase in={['playing']} phase={this.state.game.phase}>
+                <EndTurn count={this.state.game.playCount}
+                        onClick={this.handleClickEndTurn} />
+              </Phase>
+              <Phase in={['won']} phase={this.state.game.phase}>
+                <Victory teamId={this.state.game.turn} />
+              </Phase>
+              <Phase in={['gameover']} phase={this.state.game.phase}>
+                <GameOver teamId={this.state.game.turn} />
+              </Phase>
+            </Turn>
+          </div>
+        </DocumentTitle>
       )
       : <div>Loading game...</div>
   }

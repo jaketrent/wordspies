@@ -1,3 +1,4 @@
+import DocumentTitle from 'react-document-title'
 import React from 'react'
 
 import Board from './Board'
@@ -46,24 +47,26 @@ class CodemasterKey extends React.Component {
   render() {
     return this.state.game
       ? (
-        <div className={css.root}>
-          <Title>{capitalize(this.props.params.teamColor)}'s Codemaster</Title>
-          <Board keyed={true} tiles={this.state.game.tiles} />
-          <Turn turn={this.state.game.turn}>
-            <Phase in={['playing']} phase={this.state.game.phase}>
-              <TeamName turn={this.state.game.turn} />
-            </Phase>
-            <Phase in={['won']} phase={this.state.game.phase}>
-              <Victory teamId={this.state.game.turn} />
-            </Phase>
-            <Phase in={['gameover']} phase={this.state.game.phase}>
-              <GameOver teamId={this.state.game.turn} />
-            </Phase>
-          </Turn>
-          <Hint game={this.state.game}
-                onSubmit={this.handleSubmitHint}
-                teamId={getTeamId(this.props.params.teamColor)} />
-        </div>
+        <DocumentTitle title="Codemaster | WordSpies">
+          <div className={css.root}>
+            <Title>{capitalize(this.props.params.teamColor)}'s Codemaster</Title>
+            <Board keyed={true} tiles={this.state.game.tiles} />
+            <Turn turn={this.state.game.turn}>
+              <Phase in={['playing']} phase={this.state.game.phase}>
+                <TeamName turn={this.state.game.turn} />
+              </Phase>
+              <Phase in={['won']} phase={this.state.game.phase}>
+                <Victory teamId={this.state.game.turn} />
+              </Phase>
+              <Phase in={['gameover']} phase={this.state.game.phase}>
+                <GameOver teamId={this.state.game.turn} />
+              </Phase>
+            </Turn>
+            <Hint game={this.state.game}
+                  onSubmit={this.handleSubmitHint}
+                  teamId={getTeamId(this.props.params.teamColor)} />
+          </div>
+        </DocumentTitle>
       )
       : <div>Loading key...</div>
   }

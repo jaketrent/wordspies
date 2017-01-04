@@ -16,4 +16,9 @@
   color: #fff;
   border-radius: 3px;
   margin: 0 15px;
+  font-weight: 200;
+}
+.instructions {
+  color: #ababab;
+  margin-top: 50px;
 }

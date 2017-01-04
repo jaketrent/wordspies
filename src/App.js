@@ -1,3 +1,4 @@
+import DocumentTitle from 'react-document-title'
 import React, { Component } from 'react'
 
 import Title from './Title'
@@ -16,10 +17,12 @@ class App extends Component {
   }
   render() {
     return (
-      <div className={css.root}>
-        <Title>Word Spies</Title>
-        <button className={css.btn} onClick={this.handleClickCreate}>Create game</button>
-      </div>
+      <DocumentTitle title="Create new game | WordSpies">
+        <div className={css.root}>
+          <Title>Word Spies</Title>
+          <button className={css.btn} onClick={this.handleClickCreate}>Create game</button>
+        </div>
+      </DocumentTitle>
     )
   }
 }
