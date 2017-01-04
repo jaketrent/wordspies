@@ -1,45 +1,55 @@
-@import "./vars.css";
-
 .root {
-  display: inline-block;
-  outline: 1px solid black;
-  width: var(--tileWidth);
-  height: var(--tileHeight);
-  line-height: var(--tileHeight);
+  display: inline-flex;
+  width: 20%;
+  height: 20%;
+  justify-content: center;
+  align-items: center;
+}
+.tile {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80%;
+  margin: 5px;
   white-space: nowrap;
   text-overflow: ellipsis;
   cursor: pointer;
-  text-align: center;
+  border-radius: 3px;
+  background: #E1C8AE;
+  border: 3px solid #A5917B;
+  text-transform: uppercase;
+  box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.2);
 }
 .colorRed {
-  composes: root;
+  composes: tile;
   background: red;
 }
 .colorRedKeyed {
-  composes: root;
+  composes: tile;
   background: pink;
 }
 .colorBlue {
-  composes: root;
+  composes: tile;
   background: blue;
 }
 .colorBlueKeyed {
-  composes: root;
+  composes: tile;
   background: lightblue;
 }
 .colorNeutral {
-  composes: root;
+  composes: tile;
   background: tan;
 }
 .colorNeutralKeyed {
-  composes: root;
+  composes: tile;
   background: #ede1d1;
 }
 .colorAssassin {
-  composes: root;
+  composes: tile;
   background: black;
 }
 .colorAssassinKeyed {
-  composes: root;
+  composes: tile;
   background: grey;
 }

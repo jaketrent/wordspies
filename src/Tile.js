@@ -20,12 +20,14 @@ class Tile extends React.Component {
       ? colors[this.props.tile.color]
       : this.props.keyed
         ? colors[this.props.tile.color + 'k']
-        : css.root
+        : css.tile
   }
   render() {
     return (
-      <div onClick={this.props.onClick} className={this.getClassName()}>
-        {this.props.tile.word}
+      <div onClick={this.props.onClick} className={css.root}>
+        <div className={this.getClassName()}>
+          {this.props.tile.word}
+        </div>
       </div>
     )
   }
