@@ -6,10 +6,8 @@ const { string } = React.PropTypes
 class Turn extends React.Component {
   render() {
     const className = this.props.turn === 'r' ? css.rootRed : css.rootBlue
-    const text = this.props.turn === 'r' ? 'Red\'s turn' : 'Blue\'s turn'
     return (
       <div className={className}>
-        <div>{text}</div>
         {this.props.children}
       </div>
     )

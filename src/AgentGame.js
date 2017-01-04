@@ -6,6 +6,7 @@ import EndTurn from './EndTurn'
 import Phase from './Phase'
 import PlayCount from './PlayCount'
 import ReadonlyHint from './ReadonlyHint'
+import TeamName from './TeamName'
 import Turn from './Turn'
 import Victory from './Victory'
 import css from './AgentGame.css'
@@ -50,20 +51,27 @@ class AgentGame extends React.Component {
           <h2>Wordspies</h2>
           <Board onClickTile={this.handleClickTile}
                  tiles={this.state.game.tiles} />
-          <Phase in={['playing']} phase={this.state.game.phase}>
-            <Turn turn={this.state.game.turn}>
+          <Turn turn={this.state.game.turn}>
+            <Phase in={['playing']} phase={this.state.game.phase}>
+              <TeamName turn={this.state.game.turn} />
+            </Phase>
+            <Phase in={['playing']} phase={this.state.game.phase}>
               <ReadonlyHint hint={this.state.game.hint} />
+            </Phase>
+            <Phase in={['playing']} phase={this.state.game.phase}>
               <PlayCount count={this.state.game.playCount} />
+            </Phase>
+            <Phase in={['playing']} phase={this.state.game.phase}>
               <EndTurn count={this.state.game.playCount}
-                       onClick={this.handleClickEndTurn} />
-            </Turn>
-          </Phase>
-          <Phase in={['won']} phase={this.state.game.phase}>
-            <Victory teamId={this.state.game.turn} />
-          </Phase>
-          <Phase in={['gameover']} phase={this.state.game.phase}>
-            <GameOver teamId={this.state.game.turn} />
-          </Phase>
+                      onClick={this.handleClickEndTurn} />
+            </Phase>
+            <Phase in={['won']} phase={this.state.game.phase}>
+              <Victory teamId={this.state.game.turn} />
+            </Phase>
+            <Phase in={['gameover']} phase={this.state.game.phase}>
+              <GameOver teamId={this.state.game.turn} />
+            </Phase>
+          </Turn>
         </div>
       )
       : <div>Loading game...</div>
