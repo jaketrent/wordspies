@@ -1,4 +1,3 @@
-import { Link } from 'react-router'
 import React, { Component } from 'react'
 
 import Title from './Title'
@@ -13,21 +12,10 @@ class App extends Component {
   }
   handleClickCreate() {
     game.create()
-      .then(g => this.setState({ game: g }))
+      .then(g => window.location = '/games/' + g.id)
   }
   render() {
-    return this.state.game
-      ? (
-        <div className={css.root}>
-          <Title>Choose your role</Title>
-          <div className={css.links}>
-            <Link className={css.link} to={'/games/' + this.state.game.id}>Agent</Link>
-            <Link className={css.link} to={'/games/' + this.state.game.id + '/codemasters/red'}>Red Codemaster</Link>
-            <Link className={css.link} to={'/games/' + this.state.game.id + '/codemasters/blue'}>Blue Codemaster</Link>
-          </div>
-        </div>
-      )
-    : (
+    return (
       <div className={css.root}>
         <Title>Word Spies</Title>
         <button className={css.btn} onClick={this.handleClickCreate}>Create game</button>

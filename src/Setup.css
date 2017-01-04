@@ -1,0 +1,19 @@
+@import "./vars.css";
+
+.root {
+  text-align: center;
+}
+.links {
+  display: flex;
+  justify-content: center;
+}
+.link {
+  display: block;
+  font-size: 18px;
+  text-decoration: none;
+  padding: 20px 30px;
+  background: var(--colorBlue);
+  color: #fff;
+  border-radius: 3px;
+  margin: 0 15px;
+}
