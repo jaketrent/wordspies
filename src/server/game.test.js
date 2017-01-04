@@ -51,6 +51,11 @@ describe('#create', () => {
     assert.equal(actual.playCount, 0)
   })
 
+  it('has a starting phase of "playing"', () => {
+    const actual = subject.create(layouts, words)
+    assert.equal(actual.phase, 'playing')
+  })
+
 })
 
 describe('#turnTileFaceup', () => {
@@ -229,6 +234,26 @@ describe('#giveHint', () => {
     const actual = subject.giveHint(game, hint)
     assert.equal(actual.hint.word, hint.word)
     assert.equal(actual.hint.count, hint.count)
+  })
+
+})
+
+describe('#checkPhaseChange', () => {
+
+  it('changes to won if all tiles of the active turns color are faceup', () => {
+    const game = {
+      phase: 'playing',
+      tiles: [
+        { color: 'r', faceup: true },
+        { color: 'b', faceup: false },
+        { color: 'r', faceup: true }
+      ],
+      turn: 'r'
+    }
+    
+    const actual = subject.checkPhaseChange(game)
+
+    assert.equal(actual.phase, 'won')
   })
 
 })

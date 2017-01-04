@@ -32,6 +32,7 @@ function create(layouts = defaultLayouts, words = defaultWords) {
   return Object.assign({},
     layout,
     {
+      phase: 'playing',
       playCount: 0,
       tiles: layout.tiles.map((color, i) => ({
         color,
@@ -70,9 +71,9 @@ function switchTurn(game) {
   const choseIncorrectTile = game.lastPlayedTile.color !== game.turn
   return outOfPlays || choseIncorrectTile
     ? resetTurn(game)
-  : Object.assign({}, game, {
-      lastPlayedTile: null
-    })
+    : Object.assign({}, game, {
+        lastPlayedTile: null
+      })
 }
 
 function endTurn(game) {
@@ -81,7 +82,12 @@ function endTurn(game) {
 
 function advanceGame(game, i) {
   let state = turnTileFaceup(game, i)
-  state = switchTurn(state)
+  state = checkPhaseChange(state)
+
+  if (state.phase === 'playing') {
+    state = switchTurn(state)
+  }
+
   return state
 }
 
@@ -91,9 +97,23 @@ function giveHint(game, hint) {
   })
 }
 
+function currentTeamWon(game) {
+  return game.tiles
+    .filter(t => t.color === game.turn)
+    .filter(t => !t.faceup)
+    .length === 0
+}
+
+function checkPhaseChange(game) {
+  return currentTeamWon(game)
+    ? Object.assign({}, game, { phase: 'won' })
+    : game
+}
+
 exports.turnTileFaceup = turnTileFaceup
 exports.switchTurn = switchTurn
 exports.advanceGame = advanceGame
 exports.create = create
 exports.giveHint = giveHint
 exports.endTurn = endTurn
+exports.checkPhaseChange = checkPhaseChange

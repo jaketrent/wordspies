@@ -2,9 +2,11 @@ import React from 'react'
 
 import Board from './Board'
 import EndTurn from './EndTurn'
+import Phase from './Phase'
 import PlayCount from './PlayCount'
 import ReadonlyHint from './ReadonlyHint'
 import Turn from './Turn'
+import Victory from './Victory'
 import css from './AgentGame.css'
 import game from './game'
 
@@ -32,24 +34,33 @@ class AgentGame extends React.Component {
   }
   handleClickTile(i) {
     const tile = this.state.game.tiles[i]
-    if (!tile.faceup && this.state.game.hint) {
+    if (!tile.faceup && this.state.game.hint && this.state.game.phase === 'playing') {
       game.agentPlay(this.state.game.id, i)
     }
   }
   handleClickEndTurn() {
-    game.endTurn(this.state.game.id)
+    if (this.state.game.phase === 'playing')
+      game.endTurn(this.state.game.id)
   }
   render() {
     return this.state.game
       ? (
         <div className={css.root}>
+          <h2>Wordspies</h2>
           <Board onClickTile={this.handleClickTile}
                  tiles={this.state.game.tiles} />
-          <Turn turn={this.state.game.turn} />
-          <ReadonlyHint hint={this.state.game.hint} />
-          <PlayCount count={this.state.game.playCount} />
-          <EndTurn count={this.state.game.playCount}
-                   onClick={this.handleClickEndTurn} />
+          <Phase in={['playing']} phase={this.state.game.phase}>
+            <Turn turn={this.state.game.turn} />
+          </Phase>
+          <Phase in={['won']} phase={this.state.game.phase}>
+            <Victory teamId={this.state.game.turn} />
+          </Phase>
+          <Phase in={['playing']} phase={this.state.game.phase}>
+            <ReadonlyHint hint={this.state.game.hint} />
+            <PlayCount count={this.state.game.playCount} />
+            <EndTurn count={this.state.game.playCount}
+                     onClick={this.handleClickEndTurn} />
+          </Phase>
         </div>
       )
       : <div>Loading game...</div>
