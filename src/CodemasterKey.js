@@ -1,8 +1,12 @@
 import React from 'react'
 
 import Board from './Board'
+import GameOver from './GameOver'
 import Hint from './Hint'
+import Phase from './Phase'
+import TeamName from './TeamName'
 import Turn from './Turn'
+import Victory from './Victory'
 import css from './CodemasterKey.css'
 import game from './game'
 
@@ -44,7 +48,17 @@ class CodemasterKey extends React.Component {
         <div className={css.root}>
           <h2>{toUpper(this.props.params.teamColor)}'s Codemaster</h2>
           <Board keyed={true} tiles={this.state.game.tiles} />
-          <Turn turn={this.state.game.turn} />
+          <Turn turn={this.state.game.turn}>
+            <Phase in={['playing']} phase={this.state.game.phase}>
+              <TeamName turn={this.state.game.turn} />
+            </Phase>
+            <Phase in={['won']} phase={this.state.game.phase}>
+              <Victory teamId={this.state.game.turn} />
+            </Phase>
+            <Phase in={['gameover']} phase={this.state.game.phase}>
+              <GameOver teamId={this.state.game.turn} />
+            </Phase>
+          </Turn>
           <Hint game={this.state.game}
                 onSubmit={this.handleSubmitHint}
                 teamId={getTeamId(this.props.params.teamColor)} />
