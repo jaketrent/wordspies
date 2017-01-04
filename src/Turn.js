@@ -8,7 +8,10 @@ class Turn extends React.Component {
     const className = this.props.turn === 'r' ? css.rootRed : css.rootBlue
     const text = this.props.turn === 'r' ? 'Red\'s turn' : 'Blue\'s turn'
     return (
-      <div className={className}>{text}</div>
+      <div className={className}>
+        <div>{text}</div>
+        {this.props.children}
+      </div>
     )
   }
 }

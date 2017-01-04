@@ -51,19 +51,18 @@ class AgentGame extends React.Component {
           <Board onClickTile={this.handleClickTile}
                  tiles={this.state.game.tiles} />
           <Phase in={['playing']} phase={this.state.game.phase}>
-            <Turn turn={this.state.game.turn} />
+            <Turn turn={this.state.game.turn}>
+              <ReadonlyHint hint={this.state.game.hint} />
+              <PlayCount count={this.state.game.playCount} />
+              <EndTurn count={this.state.game.playCount}
+                       onClick={this.handleClickEndTurn} />
+            </Turn>
           </Phase>
           <Phase in={['won']} phase={this.state.game.phase}>
             <Victory teamId={this.state.game.turn} />
           </Phase>
           <Phase in={['gameover']} phase={this.state.game.phase}>
             <GameOver teamId={this.state.game.turn} />
-          </Phase>
-          <Phase in={['playing']} phase={this.state.game.phase}>
-            <ReadonlyHint hint={this.state.game.hint} />
-            <PlayCount count={this.state.game.playCount} />
-            <EndTurn count={this.state.game.playCount}
-                     onClick={this.handleClickEndTurn} />
           </Phase>
         </div>
       )

@@ -1,3 +1,6 @@
 .root {
   
 }
+.rootWaiting {
+  font-style: italic;
+}

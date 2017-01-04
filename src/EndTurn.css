@@ -1,3 +1,8 @@
 .root {
-  
+  background: white;
+  color: #0f0f0f;
+  border-radius: 3px;
+  border: none;
+  padding: 5px 15px;
+  font-size: 14px;
 }
