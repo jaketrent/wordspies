@@ -1,13 +1,13 @@
 import axios from 'axios'
 import io from 'socket.io-client'
 
-let socket
+const sockets = {}
 
-function getSocket() {
-  if (!socket)
-    socket = io('http://localhost:3001')
+function getSocket(gameId) {
+  if (!sockets[gameId])
+    sockets[gameId] = io('http://localhost:3001/' + gameId)
 
-  return socket
+  return sockets[gameId]
 }
 
 function create() {
@@ -21,23 +21,23 @@ function lookup(gameId) {
 }
 
 function agentPlay(gameId, index) {
-  getSocket().emit('agent-play', { gameId, index })
+  getSocket(gameId).emit('agent-play', { gameId, index })
 }
 
 function codemasterHint(gameId, hint) {
-  getSocket().emit('codemaster-hint', { gameId, hint })
+  getSocket(gameId).emit('codemaster-hint', { gameId, hint })
 }
 
 function endTurn(gameId) {
-  getSocket().emit('end-turn', { gameId })
+  getSocket(gameId).emit('end-turn', { gameId })
 }
 
-function listenGameUpdated(fn) {
-  getSocket().on('game-updated', fn)
+function listenGameUpdated(gameId, fn) {
+  getSocket(gameId).on('game-updated', fn)
 }
 
-function unlistenGameUpdated(fn) {
-  getSocket().off('game-updated', fn)
+function unlistenGameUpdated(gameId, fn) {
+  getSocket(gameId).off('game-updated', fn)
 }
 
 exports.create = create

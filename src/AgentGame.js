@@ -28,10 +28,10 @@ class AgentGame extends React.Component {
     game.lookup(this.props.params.gameId)
       .then(g => this.setState({ game: g }))
 
-    game.listenGameUpdated(this.handleGameUpdated)
+    game.listenGameUpdated(this.props.params.gameId, this.handleGameUpdated)
   }
   componentWillUnmount() {
-    game.unlistenGameUpdated(this.handleGameUpdated)
+    game.unlistenGameUpdated(this.props.params.gameId, this.handleGameUpdated)
   }
   handleGameUpdated(g) {
     this.setState({ game: g })

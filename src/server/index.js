@@ -7,6 +7,7 @@ const cors = require('koa-cors')
 
 const store = require('./store')
 const game = require('./game')
+const sockets = require('./sockets')
 
 const app = koa()
 const io = new IO()
@@ -18,7 +19,9 @@ app.use(bodyParser())
 app.use(cors())
 
 app.use(route.post('/games', function* create() {
-  this.body = store.save(game.create())
+  const g = store.save(game.create())
+  sockets.setup(g.id, app)
+  this.body = g
 }))
 
 app.use(route.get('/games/:gameId', function* find(gameId) {
@@ -27,23 +30,23 @@ app.use(route.get('/games/:gameId', function* find(gameId) {
 
 io.attach(app)
 
-io.on('create', (ctx, data) => {
-  io.broadcast('created', store.save(game.create()))
-})
+// io.on('create', (ctx, data) => {
+//   io.broadcast('created', store.save(game.create()))
+// })
 
-io.on('agent-play', (ctx, data) => {
-  const { gameId, index } = data
-  io.broadcast('game-updated', store.save(game.advanceGame(store.lookup(gameId), index)))
-})
+// io.on('agent-play', (ctx, data) => {
+//   const { gameId, index } = data
+//   io.broadcast('game-updated', store.save(game.advanceGame(store.lookup(gameId), index)))
+// })
 
-io.on('codemaster-hint', (ctx, data) => {
-  const { gameId, hint } = data
-  io.broadcast('game-updated', store.save(game.giveHint(store.lookup(gameId), hint)))
-})
+// io.on('codemaster-hint', (ctx, data) => {
+//   const { gameId, hint } = data
+//   io.broadcast('game-updated', store.save(game.giveHint(store.lookup(gameId), hint)))
+// })
 
-io.on('end-turn', (ctx, data) => {
-  const { gameId } = data
-  io.broadcast('game-updated', store.save(game.endTurn(store.lookup(gameId))))
-})
+// io.on('end-turn', (ctx, data) => {
+//   const { gameId } = data
+//   io.broadcast('game-updated', store.save(game.endTurn(store.lookup(gameId))))
+// })
 
 app.listen(port)
