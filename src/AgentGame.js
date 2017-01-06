@@ -34,6 +34,7 @@ class AgentGame extends React.Component {
     game.unlistenGameUpdated(this.props.params.gameId, this.handleGameUpdated)
   }
   handleGameUpdated(g) {
+    console.log('agent game updated', g)
     this.setState({ game: g })
   }
   handleClickTile(i) {

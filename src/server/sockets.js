@@ -5,38 +5,42 @@ const store = require('./store')
 
 const ios = {}
 
-function handleCreate(io, ctx, data) {
-  io.broadcast('created', store.save(game.create()))
-}
-
-function handleAgentPlay(io, ctx, data) {
+function handleAgentPlay(io, data) {
   const { gameId, index } = data
-  io.broadcast('game-updated', store.save(game.advanceGame(store.lookup(gameId), index)))
+  io.of('/' + gameId).emit('game-updated', store.save(game.advanceGame(store.lookup(gameId), index)))
 }
 
-function handleCodemasterHint(io, ctx, data) {
+function handleCodemasterHint(io, data) {
   const { gameId, hint } = data
-  io.broadcast('game-updated', store.save(game.giveHint(store.lookup(gameId), hint)))
+  io.of('/' + gameId).emit('game-updated', store.save(game.giveHint(store.lookup(gameId), hint)))
 }
 
-function handleEndTurn(io, ctx, data) {
+function handleEndTurn(io, data) {
   const { gameId } = data
-  io.broadcast('game-updated', store.save(game.endTurn(store.lookup(gameId))))
+  io.of('/' + gameId).emit('game-updated', store.save(game.endTurn(store.lookup(gameId))))
 }
 
-function setup(gameId, app) {
-  const io = new IO({
-    namespace: gameId
+function setup(gameId, io) {
+  const nsp = io.of('/' + gameId)
+  nsp.on('connection', socket => {
+    const handleAgentPlayInNsp = handleAgentPlay.bind(null, io)
+    const handleCodemasterHintInNsp = handleCodemasterHint.bind(null, io)
+    const handleEndTurnInNsp = handleEndTurn.bind(null, io)
+
+    socket.on('agent-play', handleAgentPlayInNsp)
+    socket.on('codemaster-hint', handleCodemasterHintInNsp)
+    socket.on('end-turn', handleEndTurnInNsp)
+
+    socket.on('disconnect', _ => {
+      // off not a fn
+      // nsp.off('create', handleCreateInNsp)
+      // nsp.off('agent-play', handleAgentPlayInNsp)
+      // nsp.off('codemaster-hint', handleCodemasterHintInNsp)
+      // nsp.off('end-turn', handleEndTurnInNsp)
+    })
   })
 
-  io.attach(app)
-
-  io.on('create', handleCreate.bind(null, io))
-  io.on('agent-play', handleAgentPlay.bind(null, io))
-  io.on('codemaster-hint', handleCodemasterHint.bind(null, io))
-  io.on('end-turn', handleEndTurn.bind(null, io))
-
-  ios[gameId] = io
+  ios[gameId] = nsp
 }
 
 exports.setup = setup
