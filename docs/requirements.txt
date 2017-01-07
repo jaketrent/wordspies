@@ -1,7 +1,7 @@
 p1
 - game art
 - responsive ui
-- multi game rooms
+x- multi game rooms
 - persist games past server restart
 - links to codemasters
 
