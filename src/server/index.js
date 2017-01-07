@@ -33,9 +33,6 @@ app.use(route.get('/games/:gameId', function* find(gameId) {
     .then(g => sockets.setup(this.db, io, g))
 }))
 
-// TODO: rm
-io.attach(app)
-
 db.connect((err, db) => {
   if (err) throw err
 
