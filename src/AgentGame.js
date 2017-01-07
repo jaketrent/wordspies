@@ -2,8 +2,9 @@ import DocumentTitle from 'react-document-title'
 import React from 'react'
 
 import Board from './Board'
-import GameOver from './GameOver'
 import EndTurn from './EndTurn'
+import GameOver from './GameOver'
+import Menu from './Menu'
 import Phase from './Phase'
 import PlayCount from './PlayCount'
 import ReadonlyHint from './ReadonlyHint'
@@ -75,6 +76,7 @@ class AgentGame extends React.Component {
                 <GameOver teamId={this.state.game.turn} />
               </Phase>
             </Turn>
+            <Menu gameId={this.state.game.id}></Menu>
           </div>
         </DocumentTitle>
       )

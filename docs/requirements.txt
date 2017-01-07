@@ -1,9 +1,10 @@
 p1
 - game art
-- responsive ui
+x- responsive ui
 x- multi game rooms
-- persist games past server restart
-- links to codemasters
+x- persist games past server restart
+x- links to codemasters
 
 p2
 - random layout generator
+- list of games
