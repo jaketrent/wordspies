@@ -5,27 +5,38 @@ const store = require('./store')
 
 const ios = {}
 
-function handleAgentPlay(io, data) {
+function handleAgentPlay(db, io, data) {
   const { gameId, index } = data
-  io.of('/' + gameId).emit('game-updated', store.save(game.advanceGame(store.lookup(gameId), index)))
+  store.lookup(db, gameId)
+    .then(g => game.advanceGame(g, index))
+    .then(g => store.save(db, g))
+    .then(g => io.of('/' + gameId).emit('game-updated', g))
 }
 
-function handleCodemasterHint(io, data) {
+function handleCodemasterHint(db, io, data) {
   const { gameId, hint } = data
-  io.of('/' + gameId).emit('game-updated', store.save(game.giveHint(store.lookup(gameId), hint)))
+  store.lookup(db, gameId)
+    .then(g => game.giveHint(g, hint))
+    .then(store.save.bind(null, db))
+    .then(g => io.of('/' + gameId).emit('game-updated', g))
 }
 
-function handleEndTurn(io, data) {
+function handleEndTurn(db, io, data) {
   const { gameId } = data
-  io.of('/' + gameId).emit('game-updated', store.save(game.endTurn(store.lookup(gameId))))
+  store.lookup(db, gameId)
+    .then(game.endTurn)
+    .then(store.save.bind(null, db))
+    .then(g => io.of('/' + gameId).emit('game-updated', g))
 }
 
-function setup(gameId, io) {
-  const nsp = io.of('/' + gameId)
+function setup(db, io, game) {
+  if (ios[game.id]) return game
+
+  const nsp = io.of('/' + game.id)
   nsp.on('connection', socket => {
-    const handleAgentPlayInNsp = handleAgentPlay.bind(null, io)
-    const handleCodemasterHintInNsp = handleCodemasterHint.bind(null, io)
-    const handleEndTurnInNsp = handleEndTurn.bind(null, io)
+    const handleAgentPlayInNsp = handleAgentPlay.bind(null, db, io)
+    const handleCodemasterHintInNsp = handleCodemasterHint.bind(null, db, io)
+    const handleEndTurnInNsp = handleEndTurn.bind(null, db, io)
 
     socket.on('agent-play', handleAgentPlayInNsp)
     socket.on('codemaster-hint', handleCodemasterHintInNsp)
@@ -40,7 +51,9 @@ function setup(gameId, io) {
     })
   })
 
-  ios[gameId] = nsp
+  ios[game.id] = nsp
+
+  return game
 }
 
 exports.setup = setup
