@@ -16,20 +16,22 @@
   margin: 5px;
   white-space: nowrap;
   text-overflow: ellipsis;
+  text-shadow: 2px 2px 0 rgba(255, 255, 255, 0.5);
   cursor: pointer;
   border-radius: 3px;
-  background: #E1C8AE;
-  border: 3px solid #A5917B;
+  background-image: url("./imgs/card.jpg");
   text-transform: uppercase;
-  box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.2);
 
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
   perspective: 1000px;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
 .color {
   composes: tile;
   color: white;
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.7);
   animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
   transition: background 1s 0.82s, color 1s 0.82s;
 }
@@ -38,36 +40,36 @@
 }
 .colorRed {
   composes: color;
-  background: var(--colorRed);
+  background-image: url("./imgs/card-red.jpg");
 }
 .colorRedKeyed {
   composes: colorKeyed;
-  background: var(--colorRedKeyed);
+  background-image: var(--colorRedKeyed);
 }
 .colorBlue {
   composes: color;
-  background: var(--colorBlue);
+  background-image: url("./imgs/card-blue.jpg");
 }
 .colorBlueKeyed {
   composes: colorKeyed;
-  background: var(--colorBlueKeyed);
+  background-image: var(--colorBlueKeyed);
 }
 .colorNeutral {
   composes: color;
   color: white;
-  background: var(--colorTan);
+  background-image: url("./imgs/card-neutral.jpg");
 }
 .colorNeutralKeyed {
   composes: colorKeyed;
-  background: var(--colorTanKeyed);
+  background-image: var(--colorTanKeyed);
 }
 .colorAssassin {
   composes: color;
-  background: var(--colorBlack);
+  background-image: var(--colorBlack);
 }
 .colorAssassinKeyed {
   composes: colorKeyed;
-  background: var(--colorBlackKeyed);
+  background-image: var(--colorBlackKeyed);
 }
 
 @keyframes shake {

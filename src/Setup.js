@@ -5,7 +5,6 @@ import React, { Component } from 'react'
 import css from './Setup.css'
 import game from './game'
 import Title from './Title'
-import titleImg from './imgs/title.jpg'
 
 const { shape, string } = React.PropTypes
 

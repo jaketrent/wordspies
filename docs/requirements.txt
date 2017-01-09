@@ -1,5 +1,7 @@
 p1
 - game art
+  - assassin card
+  - keyed card color styles
 x- responsive ui
 x- multi game rooms
 x- persist games past server restart
@@ -8,3 +10,4 @@ x- links to codemasters
 p2
 - random layout generator
 - list of games
+- agent ui - title and turn on same vert space
