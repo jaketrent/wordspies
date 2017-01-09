@@ -49,7 +49,7 @@ class CodemasterKey extends React.Component {
       ? (
         <DocumentTitle title="Codemaster | WordSpies">
           <div className={css.root}>
-            <Title>{capitalize(this.props.params.teamColor)}'s Codemaster</Title>
+            <Title><div>{capitalize(this.props.params.teamColor)}'s Codemaster</div></Title>
             <Board keyed={true} tiles={this.state.game.tiles} />
             <Turn turn={this.state.game.turn}>
               <Phase in={['playing']} phase={this.state.game.phase}>

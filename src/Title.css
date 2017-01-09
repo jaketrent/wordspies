@@ -7,3 +7,9 @@
   margin: 20px 0 26px 0;
   letter-spacing: 1px;
 }
+.img {
+  max-height: 100px;
+}
+.imgLarge {
+  max-height: auto;
+}

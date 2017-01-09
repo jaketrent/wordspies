@@ -52,7 +52,7 @@ class AgentGame extends React.Component {
       ? (
         <DocumentTitle title="Agents | WordSpies">
           <div className={css.root}>
-            <Title>WordSpies</Title>
+            <Title />
             <Board onClickTile={this.handleClickTile}
                   tiles={this.state.game.tiles} />
             <Turn turn={this.state.game.turn}>

@@ -2,9 +2,10 @@ import DocumentTitle from 'react-document-title'
 import { Link } from 'react-router'
 import React, { Component } from 'react'
 
-import Title from './Title'
 import css from './Setup.css'
 import game from './game'
+import Title from './Title'
+import titleImg from './imgs/title.jpg'
 
 const { shape, string } = React.PropTypes
 
@@ -22,7 +23,9 @@ class Setup extends Component {
     return (
       <DocumentTitle title="Choose your role | WordSpies">
         <div className={css.root}>
-          <Title>Choose your role</Title>
+          <Title large={true}>
+            <div>Choose your role</div>
+          </Title>
           <div className={css.links}>
             <Link className={css.link} to={'/games/' + gameId + '/agents'}>Agent</Link>
             <Link className={css.link} to={'/games/' + gameId + '/codemasters/red'}>Red Codemaster</Link>

@@ -7,7 +7,7 @@ exports.connect = function connect(done) {
     scripts: path.join(__dirname, 'queries')
   }, (err, db) => {
     if (err) {
-      log.fatal({ err }, 'db conn error')
+      console.log('db conn error', err)
       throw err
     }
 

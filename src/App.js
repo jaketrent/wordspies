@@ -1,9 +1,9 @@
 import DocumentTitle from 'react-document-title'
 import React, { Component } from 'react'
 
-import Title from './Title'
 import css from './App.css'
 import game from './game'
+import Title from './Title'
 
 class App extends Component {
   constructor(props) {
@@ -19,7 +19,7 @@ class App extends Component {
     return (
       <DocumentTitle title="Create new game | WordSpies">
         <div className={css.root}>
-          <Title>Word Spies</Title>
+          <Title large={true} />
           <button className={css.btn} onClick={this.handleClickCreate}>Create game</button>
         </div>
       </DocumentTitle>
