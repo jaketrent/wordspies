@@ -1,13 +1,27 @@
-p1
-- game art
-  - assassin card
-  - keyed card color styles
+mvc
 x- responsive ui
 x- multi game rooms
 x- persist games past server restart
 x- links to codemasters
 
-p2
+art phase
+x- title
+x- card backs
+- overlay faces on cards
+- neutral face
+- white color behind faces
+- turn bar backgrounds
+- animated turn change
+
+deploy
+- host static webpack server on app server
+- to heroku
+
+moar features
 - random layout generator
 - list of games
 - agent ui - title and turn on same vert space
+
+
+
+

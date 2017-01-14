@@ -7,26 +7,32 @@ class Tile extends React.Component {
   getClassName() {
     const colors = {
       r: css.colorRed,
-      // rk: css.colorRedKeyed,
+      rk: css.colorRedKeyed,
       b: css.colorBlue,
-      // bk: css.colorBlueKeyed,
+      bk: css.colorBlueKeyed,
       n: css.colorNeutral,
-      // nk: css.colorNeutralKeyed,
+      nk: css.colorNeutralKeyed,
       a: css.colorAssassin,
-      // ak: css.colorAssassinKeyed
+      ak: css.colorAssassinKeyed
     }
 
     return this.props.tile.faceup
       ? colors[this.props.tile.color]
-      // : this.props.keyed
-      //   ? colors[this.props.tile.color + 'k']
+      : this.props.keyed
+        ? colors[this.props.tile.color + 'k']
         : css.tile
+
+  }
+  renderWord() {
+    return this.props.tile.faceup
+      ? '\u00a0'
+      : this.props.tile.word
   }
   render() {
     return (
       <div onClick={this.props.onClick} className={css.root}>
         <div className={this.getClassName()}>
-          {this.props.tile.word}
+          {this.renderWord()}
         </div>
       </div>
     )

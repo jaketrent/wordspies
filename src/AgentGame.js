@@ -9,7 +9,6 @@ import Phase from './Phase'
 import PlayCount from './PlayCount'
 import ReadonlyHint from './ReadonlyHint'
 import TeamName from './TeamName'
-import Title from './Title'
 import Turn from './Turn'
 import Victory from './Victory'
 import css from './AgentGame.css'
@@ -52,7 +51,6 @@ class AgentGame extends React.Component {
       ? (
         <DocumentTitle title="Agents | WordSpies">
           <div className={css.root}>
-            <Title />
             <Board onClickTile={this.handleClickTile}
                   tiles={this.state.game.tiles} />
             <Turn turn={this.state.game.turn}>

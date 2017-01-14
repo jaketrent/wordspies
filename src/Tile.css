@@ -19,14 +19,15 @@
   text-shadow: 2px 2px 0 rgba(255, 255, 255, 0.5);
   cursor: pointer;
   border-radius: 3px;
-  background-image: url("./imgs/card.jpg");
+  background-image: url("./imgs/blank.png"), url("./imgs/card.png");
+  background-position: center;
+  background-size: contain, 100% 100%;
+  background-repeat: no-repeat, no-repeat;
   text-transform: uppercase;
 
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
   perspective: 1000px;
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
 }
 .color {
   composes: tile;
@@ -40,36 +41,41 @@
 }
 .colorRed {
   composes: color;
-  background-image: url("./imgs/card-red.jpg");
+  background-image: url("./imgs/red-char.png"), url("./imgs/card-red.png");
 }
 .colorRedKeyed {
   composes: colorKeyed;
-  background-image: var(--colorRedKeyed);
+  background-image: url("./imgs/blank.png"), url("./imgs/card-red.png");
 }
 .colorBlue {
   composes: color;
-  background-image: url("./imgs/card-blue.jpg");
+  background-image: url("./imgs/blue-char.png"), url("./imgs/card-blue.png");
 }
 .colorBlueKeyed {
   composes: colorKeyed;
-  background-image: var(--colorBlueKeyed);
+  background-image: url("./imgs/blank.png"), url("./imgs/card-blue.png");
 }
 .colorNeutral {
   composes: color;
   color: white;
-  background-image: url("./imgs/card-neutral.jpg");
+  background-image: url("./imgs/assassin-char.png"), url("./imgs/card-neutral.png");
 }
 .colorNeutralKeyed {
   composes: colorKeyed;
-  background-image: var(--colorTanKeyed);
+  background-image: url("./imgs/blank.png"), url("./imgs/card-neutral.png");
 }
 .colorAssassin {
   composes: color;
-  background-image: var(--colorBlack);
+  background-image: url("./imgs/assassin-char.png"), url("./imgs/card-assassin.png");
 }
 .colorAssassinKeyed {
   composes: colorKeyed;
-  background-image: var(--colorBlackKeyed);
+  color: white;
+  background-image: url("./imgs/blank.png"), url("./imgs/card-assassin.png");
+}
+.img {
+  max-width: 80%;
+  max-height: 80%;
 }
 
 @keyframes shake {
