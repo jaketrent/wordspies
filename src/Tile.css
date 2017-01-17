@@ -58,7 +58,7 @@
 .colorNeutral {
   composes: color;
   color: white;
-  background-image: url("./imgs/assassin-char.png"), url("./imgs/card-neutral.png");
+  background-image: url("./imgs/neutral-char.png"), url("./imgs/card-neutral.png");
 }
 .colorNeutralKeyed {
   composes: colorKeyed;
