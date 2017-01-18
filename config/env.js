@@ -8,6 +8,7 @@ function getClientEnvironment(publicUrl) {
     .keys(process.env)
     .filter(key => REACT_APP.test(key))
     .reduce((env, key) => {
+      console.log('key', key, process.env[key])
       env[key] = JSON.stringify(process.env[key]);
       return env;
     }, {
