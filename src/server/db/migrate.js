@@ -1,10 +1,8 @@
-require('dotenv').config()
+const config = require('../config')
 
 const fs = require('fs')
 const massiveMigrate = require('massive-migrate')
 const path = require('path')
-
-const config = require('../config')
 
 const connectionString = config.dbConnUrl
 const directory = path.join(__dirname, 'migrations')
