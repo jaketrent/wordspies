@@ -4,7 +4,9 @@ const fs = require('fs')
 const massiveMigrate = require('massive-migrate')
 const path = require('path')
 
-const connectionString = process.env.DB_CONN_URL
+const config = require('../config')
+
+const connectionString = config.dbConnUrl
 const directory = path.join(__dirname, 'migrations')
 
 fs.readFile(path.join(__dirname, '..', '..', '..', 'package.json'), (err, data) => {

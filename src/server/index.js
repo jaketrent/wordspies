@@ -1,4 +1,4 @@
-require('dotenv').config()
+const config = require('./config')
 
 const bodyParser = require('koa-bodyparser')
 const fs = require('fs')
@@ -20,7 +20,7 @@ const app = koa()
 const server = http.createServer(app.callback())
 const io = socketio(server)
 
-const port = process.env.PORT || 3001
+const port = config.port
 
 app.use(logger())
 app.use(bodyParser())
