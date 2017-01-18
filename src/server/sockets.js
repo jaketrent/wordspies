@@ -1,5 +1,3 @@
-const IO = require('koa-socket')
-
 const game = require('./game')
 const store = require('./store')
 
