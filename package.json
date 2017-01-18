@@ -74,6 +74,9 @@
     "server": "node src/server",
     "heroku-postbuild": "npm run build"
   },
+  "engines": {
+    "node": "6.1.0"
+  },
   "jest": {
     "collectCoverageFrom": [
       "src/**/*.{js,jsx}"
