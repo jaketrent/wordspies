@@ -27,20 +27,20 @@ app.use(bodyParser())
 app.use(cors())
 app.use(static(path.resolve('build')))
 
-app.use(route.post('/games', function* create() {
+app.use(route.post('/api/games', function* create() {
   this.body = yield store.save(this.db, game.create())
     .then(g => sockets.setup(this.db, io, g))
 }))
 
-app.use(route.get('/games/:gameId', function* find(gameId) {
+app.use(route.get('/api/games/:gameId', function* find(gameId) {
   this.body = yield store.lookup(this.db, gameId)
     .then(g => sockets.setup(this.db, io, g))
 }))
 
-app.use(route.get('/', index))
+app.use(route.get('*', index))
 
 function* index() {
-  this.body = fs.readFileSync('./client/index.html', 'utf8')
+  this.body = fs.readFileSync(path.resolve(path.join('build', 'index.html')), 'utf8')
 }
 
 db.connect((err, db) => {

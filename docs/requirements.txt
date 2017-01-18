@@ -14,8 +14,10 @@ x- card backs
 - animated turn change
 
 deploy
-- host static webpack server on app server
-- to heroku
+x- host static webpack server on app server
+x- to heroku
+x- config api url for client
+- api namespace the api
 
 moar features
 - random layout generator

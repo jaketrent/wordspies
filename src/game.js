@@ -5,18 +5,18 @@ const sockets = {}
 
 function getSocket(gameId) {
   if (!sockets[gameId])
-    sockets[gameId] = io('http://localhost:3001/' + gameId)
+    sockets[gameId] = io(process.env.REACT_APP_API_HOST + '/' + gameId)
 
   return sockets[gameId]
 }
 
 function create() {
-  return axios.post('http://localhost:3001/games')
+  return axios.post(process.env.REACT_APP_API_HOST + '/api/games')
     .then(res => res.data)
 }
 
 function lookup(gameId) {
-  return axios.get('http://localhost:3001/games/' + gameId)
+  return axios.get(process.env.REACT_APP_API_HOST + '/api/games/' + gameId)
     .then(res => res.data)
 }
 
