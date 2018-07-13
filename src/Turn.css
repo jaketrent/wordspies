@@ -1,6 +1,10 @@
 @import "./vars.css";
 
 .root {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 50px;
   display: flex;
   justify-content: space-between;
   align-items: center;

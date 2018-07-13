@@ -6,13 +6,12 @@ import GameOver from './GameOver'
 import Hint from './Hint'
 import Phase from './Phase'
 import TeamName from './TeamName'
-import Title from './Title'
 import Turn from './Turn'
 import Victory from './Victory'
 import css from './CodemasterKey.css'
 import game from './game'
 
-const { shape, string} = React.PropTypes
+const { shape, string } = React.PropTypes
 
 function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.substr(1)
@@ -30,8 +29,7 @@ class CodemasterKey extends React.Component {
     this.handleGameUpdated = this.handleGameUpdated.bind(this)
   }
   componentWillMount() {
-    game.lookup(this.props.params.gameId)
-      .then(g => this.setState({ game: g }))
+    game.lookup(this.props.params.gameId).then(g => this.setState({ game: g }))
 
     game.listenGameUpdated(this.props.params.gameId, this.handleGameUpdated)
   }
@@ -45,30 +43,32 @@ class CodemasterKey extends React.Component {
     game.codemasterHint(this.props.params.gameId, hint)
   }
   render() {
-    return this.state.game
-      ? (
-        <DocumentTitle title="Codemaster | WordSpies">
-          <div className={css.root}>
-            <Title><div>{capitalize(this.props.params.teamColor)}'s Codemaster</div></Title>
-            <Board keyed={true} tiles={this.state.game.tiles} />
-            <Turn turn={this.state.game.turn}>
-              <Phase in={['playing']} phase={this.state.game.phase}>
-                <TeamName turn={this.state.game.turn} />
-              </Phase>
-              <Phase in={['won']} phase={this.state.game.phase}>
-                <Victory teamId={this.state.game.turn} />
-              </Phase>
-              <Phase in={['gameover']} phase={this.state.game.phase}>
-                <GameOver teamId={this.state.game.turn} />
-              </Phase>
-            </Turn>
-            <Hint game={this.state.game}
-                  onSubmit={this.handleSubmitHint}
-                  teamId={getTeamId(this.props.params.teamColor)} />
-          </div>
-        </DocumentTitle>
-      )
-      : <div>Loading key...</div>
+    return this.state.game ? (
+      <DocumentTitle title="Codemaster | WordSpies">
+        <div className={css.root}>
+          <Board keyed tiles={this.state.game.tiles} />
+          <Turn turn={this.state.game.turn}>
+            <div>{capitalize(this.props.params.teamColor)}'s CODEMASTER</div>
+            <Hint
+              game={this.state.game}
+              onSubmit={this.handleSubmitHint}
+              teamId={getTeamId(this.props.params.teamColor)}
+            />
+            <Phase in={['playing']} phase={this.state.game.phase}>
+              <TeamName turn={this.state.game.turn} />
+            </Phase>
+            <Phase in={['won']} phase={this.state.game.phase}>
+              <Victory teamId={this.state.game.turn} />
+            </Phase>
+            <Phase in={['gameover']} phase={this.state.game.phase}>
+              <GameOver teamId={this.state.game.turn} />
+            </Phase>
+          </Turn>
+        </div>
+      </DocumentTitle>
+    ) : (
+      <div>Loading key...</div>
+    )
   }
 }
 CodemasterKey.propTypes = {
