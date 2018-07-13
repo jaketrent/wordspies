@@ -1,0 +1,17 @@
+- List of active games
+  - Number of connections in each game?
+- Codemaster view -
+  - Fit phone - no scroll
+  - Remove logo
+  - Hint input on-page
+  - Show current hint
+- Created game view
+  - Share link w/in UI
+- Agent view
+  - 
+- Offline support
+  - Full screen (no url bar)
+  - Home screen installable
+  - Icon
+- Game
+  - Allow custom dictionary
