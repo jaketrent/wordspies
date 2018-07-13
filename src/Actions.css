@@ -2,7 +2,7 @@
 
 .root {
   position: fixed;
-  top: 0;
+  bottom: 0;
   left: 0;
   height: 50px;
   display: flex;
@@ -13,12 +13,5 @@
   text-align: center;
   color: white;
   font-size: 18px;
-}
-.rootRed {
-  composes: root;
-  background: var(--colorRed);
-}
-.rootBlue {
-  composes: root;
-  background: var(--colorBlue);
+  background: #C08744;
 }

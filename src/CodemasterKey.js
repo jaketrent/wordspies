@@ -1,10 +1,12 @@
 import DocumentTitle from 'react-document-title'
 import React from 'react'
 
+import Actions from './Actions'
 import Board from './Board'
 import GameOver from './GameOver'
 import Hint from './Hint'
 import Phase from './Phase'
+import ReadonlyHint from './ReadonlyHint'
 import TeamName from './TeamName'
 import Turn from './Turn'
 import Victory from './Victory'
@@ -49,13 +51,11 @@ class CodemasterKey extends React.Component {
           <Board keyed tiles={this.state.game.tiles} />
           <Turn turn={this.state.game.turn}>
             <div>{capitalize(this.props.params.teamColor)}'s CODEMASTER</div>
-            <Hint
-              game={this.state.game}
-              onSubmit={this.handleSubmitHint}
-              teamId={getTeamId(this.props.params.teamColor)}
-            />
             <Phase in={['playing']} phase={this.state.game.phase}>
               <TeamName turn={this.state.game.turn} />
+            </Phase>
+            <Phase in={['playing']} phase={this.state.game.phase}>
+              <ReadonlyHint hint={this.state.game.hint} />
             </Phase>
             <Phase in={['won']} phase={this.state.game.phase}>
               <Victory teamId={this.state.game.turn} />
@@ -64,6 +64,13 @@ class CodemasterKey extends React.Component {
               <GameOver teamId={this.state.game.turn} />
             </Phase>
           </Turn>
+          <Actions>
+            <Hint
+              game={this.state.game}
+              onSubmit={this.handleSubmitHint}
+              teamId={getTeamId(this.props.params.teamColor)}
+            />
+          </Actions>
         </div>
       </DocumentTitle>
     ) : (

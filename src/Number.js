@@ -10,19 +10,24 @@ class Number extends React.Component {
     this.handleClickNum = this.handleClickNum.bind(this)
   }
   handleClickNum(count, evt) {
-    evt.preventDefault() 
+    evt.preventDefault()
     this.setState({ count })
   }
   renderNums() {
     return [1, 2, 3, 4, 5].map(num => {
       const className = num === this.state.count ? css.numActive : css.num
       return (
-        <button className={className}
-                key={num}
-                onClick={this.handleClickNum.bind(null, num)}>{num}</button>
+        <button
+          className={className}
+          key={num}
+          onClick={this.handleClickNum.bind(null, num)}
+        >
+          {num}
+        </button>
       )
     })
   }
+  // TODO: are these used?
   renderInput() {
     return React.cloneElement(this.props.children, {
       style: { display: 'none' },

@@ -1,6 +1,7 @@
 import DocumentTitle from 'react-document-title'
 import React from 'react'
 
+import Actions from './Actions'
 import Board from './Board'
 import EndTurn from './EndTurn'
 import GameOver from './GameOver'
@@ -66,12 +67,6 @@ class AgentGame extends React.Component {
             <Phase in={['playing']} phase={this.state.game.phase}>
               <PlayCount count={this.state.game.playCount} />
             </Phase>
-            <Phase in={['playing']} phase={this.state.game.phase}>
-              <EndTurn
-                count={this.state.game.playCount}
-                onClick={this.handleClickEndTurn}
-              />
-            </Phase>
             <Phase in={['won']} phase={this.state.game.phase}>
               <Victory teamId={this.state.game.turn} />
             </Phase>
@@ -79,6 +74,14 @@ class AgentGame extends React.Component {
               <GameOver teamId={this.state.game.turn} />
             </Phase>
           </Turn>
+          <Actions>
+            <Phase in={['playing']} phase={this.state.game.phase}>
+              <EndTurn
+                count={this.state.game.playCount}
+                onClick={this.handleClickEndTurn}
+              />
+            </Phase>
+          </Actions>
         </div>
       </DocumentTitle>
     ) : (
